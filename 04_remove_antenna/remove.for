@@ -9,7 +9,7 @@
       integer i,j,s1,s2,m1,H,ns,stat,neq,tyeq,tm
 
       pi=atan(1.)*4
-      
+
       open(1,file='fit.inp',status='old')
       open(2,file='comfilt.para',status='old')
       ns=0
@@ -120,6 +120,6 @@ c                  g(tm)=H
       end do
       close(1)
       close(2)
-     
+
       stop
       end

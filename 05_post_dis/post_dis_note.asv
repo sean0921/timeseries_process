@@ -5,7 +5,7 @@ close all
 clc
 %
 filelist = dir('*_o.dat'); % read rinex file)
-col_num=85;   % (震後的天數)   
+col_num=85;   % (震後的天數)
 
 diff=[];       % (計算擬合線)
 for i = 1:length(filelist);
@@ -16,8 +16,8 @@ for i = 1:length(filelist);
     G=[ones(size(x)),x,heaviside(x-2016.09836),heaviside(x-2016.09836).*x,cos(2*pi*(x-2016.09836)),sin(2*pi*(x-2016.09836)),cos(4*pi*(x-2016.09836)),sin(4*pi*(x-2016.09836)),exp(-(x-2016.09836)).*heaviside(x-2016.09836)];
     m=G\y; % (公式的參數：第二格:velocity, 第三格: 同震量  )
     yc=G*m; % (擬合線的量值)
-    
-    
+
+
     xo=2016.09836;     % (計算震後量值，皆減去震後第一天)
     for j=1:1:85;
         xe(j)=xo+0.00274*j;
@@ -31,7 +31,7 @@ for i = 1:length(filelist);
     diff=[diff;day];  %(ENU的差值)
 end
 
-%====En====% 
+%====En====%
 diff_sort=zeros(length(filelist),col_num);
 for i1=1:round(length(filelist)/3)
     diff_sort(i1,:)=diff(1+(i1-1)*3,:); %for 1+3*(i1-1)
@@ -59,7 +59,7 @@ for n=1:3:276;     %(站數X3-3 )
     filename_new = ['D' num2str((n+2)/3) '_' 'H' '.dat'];
     fid=fopen(filename_new,'w');
     fprintf(fid, '%f\t%f\t%f\t%f\t%f\t%f\t%f\n',PD);
-    
+
     PD2=[lon';lat';Day(:,3)';(0.01*ones(size(lon)))';(0*ones(size(lon)))'];
     filename_new2 = ['D' num2str((n+2)/3) '_' 'V' '.dat'];
     fid2=fopen(filename_new2,'w');

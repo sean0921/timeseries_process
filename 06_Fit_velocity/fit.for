@@ -23,7 +23,7 @@
       close(1)
       allocate(sta(ns),tn(ns),t1(ns),tf(ns),dt(ns),nn(ns))
       allocate(vee(ns),vnn(ns),vhh(ns),see(ns),snn(ns),shh(ns))
-      
+
       open(1,file='fit.para')
       open(2,file='fit.out')
       open(3,file='fit.inp',status='old')
@@ -134,7 +134,7 @@
             write(10,'(f10.5,f10.2)')t(i),cal(i)
           end do
           close(10)
-          
+
           fmt='(a4,1x,a1,1x,10f19.9)'
           call int2char(m1,cm1)
           fmt(14:15)=cm1(1:2)
@@ -450,14 +450,14 @@ c            if(abs(rt-t(n))<.001) exit
            end if
          end do
         end if
-        
+
         if(tyeq==1) deallocate(teq,sym)
         deallocate(ce,cn,ch,ces,cns,chs,pve,pvn,pvh,pves,pvns,pvhs)
       end do
       close(3)
       close(2)
       close(1)
-      
+
       open(99,file='fit.fout')
       do i=1,ns
         if(nn(i)<2) cycle
@@ -473,12 +473,12 @@ c            if(abs(rt-t(n))<.001) exit
      +       tn(i),dt(i),t1(i),tf(i)
              exit
           end if
-        end do 
+        end do
        rewind(98)
       end do
       close(99)
       close(98)
-      
+
       stop
       end
 

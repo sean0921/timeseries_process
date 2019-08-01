@@ -4,7 +4,7 @@ c
 c----bern2time.for---
 c
       program bern2time
-      
+
       implicit none
       character line*200
       character sta1*4,inpfile*12
@@ -137,14 +137,14 @@ c***********************************************************************
       real*8 lons,lats,hgh,en,ee,eh,tt
 
       print*,'Start time_anal'
-      
+
       do i=1,n
         open (11,file=plhfil(i))
         read(11,'(f7.4)')tt
 	dy(1:3)=plhfil(i)(3:5)
 	yr(3:4)=plhfil(i)(1:2)
 	if(yr(3:3)=='9') yr(1:2)='19'
-	if(yr(3:3)/='9') yr(1:2)='20'	
+	if(yr(3:3)/='9') yr(1:2)='20'
 	t=yr//' '//dy
         stat=0
         do while (stat==0)
@@ -187,21 +187,21 @@ c***********************************************************************
       pi=atan(1.)*4
 
       print*,'Start coordvar'
-      
+
       do i=1,stn
         inp=sta(i)//'.out'
         out1='ts_'//sta(i)//'_n_b.dat'
         out2='ts_'//sta(i)//'_e_b.dat'
         out3='ts_'//sta(i)//'_u_b.dat'
         out4='ts_'//sta(i)//'_b.dat'
-        
+
 	open(12,file=inp)
         open(13,file=out1)
         open(14,file=out2)
         open(15,file=out3)
         open(16,file=out4)
 
-        write(16,*)'year doy    hr        dn      sn      de      se    
+        write(16,*)'year doy    hr        dn      sn      de      se
      +  dh      sh (unit: mm)'
 
         n=0
@@ -252,7 +252,7 @@ c***********************************************************************
 	avgh=avgh/real(n)
 
         call bubble_sort_n(time,yr,dy,t,rlon,rlat,hgh,se,sn,sh,n)
-        
+
         adn=0
         ade=0
         adh=0

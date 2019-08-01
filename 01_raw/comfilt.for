@@ -13,7 +13,7 @@ c
       double precision,allocatable::t(:),std(:),g(:,:),d(:),w(:),cal(:)
       double precision,allocatable::m(:),sg(:),teq(:)
       integer i,j,s1,s2,m1,n,ns,stat,neq,H,tyeq,tm
-      
+
       pi=atan(1.)*4
 
       open(1,file='comfilt.inp',status='old')
@@ -129,7 +129,7 @@ c
         if(tyeq==1) deallocate(teq,sym)
       end do
       close(1)
-     
+
       call filter(ns)
       call fit(ns)
 
@@ -203,7 +203,7 @@ c.......................................................................
           close(11)
         end do
         close(10,status='delete')
-        
+
         call bubble_sort(tt,tn)
         t1=1
         do i=2,tn
@@ -262,7 +262,7 @@ c.......................................................................
 	  ne=ne+1
         end do
         close(11)
-        
+
         open(10,file=outfile,status='old')  ! step 3: filtering
         allocate(et(ne),e(ne))
         do i=1,ne
@@ -314,7 +314,7 @@ c.......................................................................
       pi=atan(1.)*4
 
       print*,'Start fit....'
-      
+
       open(1,file='comfilt.para')
       open(2,file='comfilt.out')
       open(3,file='comfilt.inp',status='old')
@@ -683,7 +683,7 @@ c.......................................................................
       close(3)
       close(2)
       close(1)
-      
+
       print*,'End fit....'
 
       return

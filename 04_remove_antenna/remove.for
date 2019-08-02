@@ -48,7 +48,7 @@
           if(s2==3) rc='u'
           allocate(m(m1),g(m1))
           do i=1,ns*6
-            read(2,'(a,\)')line
+            read(2,'(a)')line
             read(line,*)stap,c
             if(stap(1:4)==sta(1:4).and.c(1:1)==rc(1:1)) then
               read(line,*)stap,c,(m(j),j=1,m1)

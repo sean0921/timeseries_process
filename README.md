@@ -14,5 +14,5 @@
     - type `make mingw` manully in each subfolder, it should be compiled (with debug symbol by default).
     - MinGW build mode is NOT automatically detected, you should type `make mingw` on your own, so that the content of the program will be correct
 
-# Temporary Install path
+## Temporary Install path
 * Not really set yet, just make a temporary test directory named `test`, and place on there.

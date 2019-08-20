@@ -149,6 +149,18 @@ c.......................................................................
 
       print*,'Start filter....'
 
+#ifdef MINGW
+      inquire(file='warning-e.sum',exist=alive)
+      if(alive) call system('del warning-e.sum')
+      inquire(file='warning-n.sum',exist=alive)
+      if(alive) call system('del warning-n.sum')
+      inquire(file='warning-u.sum',exist=alive)
+      if(alive) call system('del warning-u.sum')
+      inquire(file='fil.dat',exist=alive)
+      if(alive) call system('del fil.dat')
+      inquire(file='tmp.dat',exist=alive)
+      if(alive) call system('del fil.dat')
+#else
       inquire(file='warning-e.sum',exist=alive)
       if(alive) call system('rm -f warning-e.sum')
       inquire(file='warning-n.sum',exist=alive)
@@ -159,6 +171,7 @@ c.......................................................................
       if(alive) call system('rm -f fil.dat')
       inquire(file='tmp.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
+#endif
 
       do c=1,3
         open(10,file='comfilt.inp',status='old')

@@ -250,29 +250,29 @@ c.......................................................................
         open(11,file=outfile)
         ne=0
         do k=1,t1
-	  err=0.
-	  nt=0
-	  do i=1,ns
-	    do j=1,n(i)
-	      if(abs(rt(k)-t(i,j))<.0001) then
-	        err=err+res(i,j)
-	        nt=nt+1
-	        exit
-	      end if
-	    end do
-	  end do
-	  if(nt<4) then
-	    if(c==1) open(10,file='warning-e.sum',position='append')
-	    if(c==2) open(10,file='warning-n.sum',position='append')
-	    if(c==3) open(10,file='warning-h.sum',position='append')
-	    write(10,'(f10.5," Number of stations: ",i1," < 4 !!")')
+          err=0.
+          nt=0
+          do i=1,ns
+            do j=1,n(i)
+              if(abs(rt(k)-t(i,j))<.0001) then
+                err=err+res(i,j)
+                nt=nt+1
+                exit
+              end if
+            end do
+          end do
+          if(nt<4) then
+            if(c==1) open(10,file='warning-e.sum',position='append')
+            if(c==2) open(10,file='warning-n.sum',position='append')
+            if(c==3) open(10,file='warning-h.sum',position='append')
+            write(10,'(f10.5," Number of stations: ",i1," < 4 !!")')
      +      rt(k),nt
-	    close(10)
-	  end if
-	  if(nt<2) cycle
-	  err=err/real(nt)
-	  write(11,'(f10.5,f9.2)')rt(k),err
-	  ne=ne+1
+            close(10)
+          end if
+          if(nt<2) cycle
+          err=err/real(nt)
+          write(11,'(f10.5,f9.2)')rt(k),err
+          ne=ne+1
         end do
         close(11)
 

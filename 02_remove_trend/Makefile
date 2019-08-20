@@ -5,8 +5,8 @@ FC_MINGW	:= i686-w64-mingw32.static-gfortran
 FCFLAGS 	:= -std=legacy -g -static -cpp
 FCFLAGS_MINGW 	:= -DMINGW
 
-OBJS		= remove  plot_ts
-OBJS_MINGW	= remove.exe  plot_ts.exe
+OBJS		= remove_trend  plot_ts
+OBJS_MINGW	= remove_trend.exe  plot_ts.exe
 
 all: $(OBJS)
 

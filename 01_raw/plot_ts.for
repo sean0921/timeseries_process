@@ -2,7 +2,7 @@
 
       implicit none
       integer,parameter::m1=10000
-      character site(m1)*4,file(16)*15,fmt*200,maping*10,ps*10,para*1
+      character site(m1)*4,file(16)*15,fmt*200,maping*11,ps*10,para*1
       double precision,allocatable::teq(:)
       real*8 xmin,ymin,xmax,ymax,xminb,yminb,xmaxb,ymaxb
       real*8 dx,dy,dxb,dyb,pxminb,pxmaxb
@@ -29,7 +29,11 @@
 
       do i=1,n
         print*,'Processing in station: ',site(i)
+#ifdef MINGW
+        maping='map'//site(i)(1:4)//'.bat'
+#else
         maping='map'//site(i)(1:4)//'.sh'
+#endif
         ps='map'//site(i)(1:4)//'.ps'
 
         file(1)='ts_'//site(i)//'_n_o.dat'
@@ -46,9 +50,14 @@
         file(12)='ts_'//site(i)//'_u_t.dat'
 
         open(11,file=maping)
-        write(11,'("#!/usr/bin/env bash")')
+#ifdef MINGW
+        write(11,'("@echo on")')
+#else
+        write(11,'("#!/bin/sh")')
         write(11,'("")')
         write(11,'("set -eux")')
+#endif
+        write(11,'("")')
         write(11,'("gmt gmtset FONT_ANNOT 8p FONT_LABEL 9p MAP_TICK_",
      + "LENGTH -0.030i MAP_ANNOT_OFFSET 0.035i MAP_LABEL_OFFSET 0.",
      + "0525i FONT_TITLE 12 MAP_TITLE_OFFSET 0.01i")')
@@ -198,9 +207,17 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      + -O -V >> ",a10)')file(12),ps
           end if
         end do
+#ifdef MINGW
+        write(11,'("del sym gmt.history gmt.conf")')
+#else
         write(11,'("rm -f sym gmt.history gmt.conf")')
+#endif
         close(11)
-        call system('bash '//maping)
+#ifdef MINGW
+        call system(maping)
+#else
+        call system('sh '//maping)
+#endif
       end do
       if(neq>0) deallocate(teq)
 

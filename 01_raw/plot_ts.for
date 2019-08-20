@@ -207,6 +207,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      + -O -V >> ",a10)')file(12),ps
           end if
         end do
+        write(11,'("gmt psconvert -Tg ",a10)')ps
 #ifdef MINGW
         write(11,'("del sym gmt.history gmt.conf")')
 #else

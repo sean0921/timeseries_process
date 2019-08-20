@@ -1,18 +1,34 @@
+## GNU makefile
+
 FC		:= gfortran
 FC_MINGW	:= i686-w64-mingw32.static-gfortran
+FCFLAGS 	:= -std=legacy -g -static -cpp
+FCFLAGS_MINGW 	:= -DMINGW
 
-OBJS		= plot_ts  fit
-OBJS_MINGW	= plot_ts.exe  fit.exe
+OBJS		= fit  plot_ts_2
+OBJS_MINGW	= fit.exe  plot_ts_2.exe
 
 all: $(OBJS)
 
 %: %.for
-	$(FC) -o $@ $^
+	$(FC) $(FCFLAGS) -o $@ $^
 
 mingw: $(OBJS_MINGW)
 
 %.exe: %.for
-	$(FC_MINGW) -o $@ $^
+	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
+
+install: $(OBJS)
+	install -m 0755 $(OBJS) test/
+
+mingw_install: $(OBJS_MINGW)
+	install -m 0755 $(OBJS_MINGW) test/
+
+help:
+	@echo "all:           compile program for Linux or other *nix-like platform"
+	@echo "mingw:         compile program for Win32 platform"
+	@echo "install:       install program for *nix-like platform to test/"
+	@echo "mingw_install: install program for Win32 platform to test/"
 
 clean:
 	rm -f $(OBJS) *.exe

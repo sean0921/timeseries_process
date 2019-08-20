@@ -18,7 +18,7 @@ mingw: $(OBJS_MINGW)
 clean:
 	rm -f $(OBJS) *.exe
 
-install:
+install: $(OBJS)
 	install -m 0755 $(OBJS) test/
 
 mingw_install:

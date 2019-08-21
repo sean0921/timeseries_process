@@ -3,7 +3,7 @@ c--              Update 2005.09.19
 c
 c
       program getpl
-      
+
       implicit none
       character line*200,sta1*4,inpfile*13
       character,allocatable::sta(:)*4
@@ -50,7 +50,7 @@ c
       end do
       close(15,status='delete')
       close(12)
-      
+
       open(12,file='tmp',status='old')
       n=0
       stat=0
@@ -94,7 +94,7 @@ c
         read(12,*)sta(i),lda(i),phy(i)
       end do
       close(12,status='delete')
-      
+
       call bubble_sort(sta,phy,lda,n)
 
       open(12,file='getpl.gout')
@@ -118,7 +118,7 @@ c.......................................................................
       real*8 b(n),c(n),temp2,temp3
       character a(n)*4,temp1*4
       integer i,j
-      
+
       do i=n-1,1,-1
         do j=1,i
           if(a(j).gt.a(j+1)) then
@@ -134,6 +134,6 @@ c.......................................................................
           end if
         end do
       end do
-      
+
       return
       end

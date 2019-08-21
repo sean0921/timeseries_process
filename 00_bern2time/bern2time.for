@@ -44,11 +44,12 @@ c
       end if
 
       inquire(file='fil.dat',exist=alive)
-      if(alive) call system('del fil.dat')
+      if(alive) call system('rm -f fil.dat')
       inquire(file='error.msg',exist=alive)
-      if(alive) call system('del error.msg')
-      call system('del ts_????n_b.gmt ts_????e_b.gmt ts_????h_b.gmt')
-      call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
+      if(alive) call system('rm -f error.msg')
+      call system('rm -f ts_????n_b.gmt ts_????e_b.gmt ts_????h_b.gmt')
+      call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.da
+     +t')
 
       open(15,file='fil.dat',status='old')
       stat=0
@@ -60,7 +61,7 @@ c
       rewind(15)
       allocate(outfile(n))
       do i=1,n
-        read(15,'(a12)') inpfile
+        read(15,'(a12)')inpfile
 c        print*,inpfile
         outfile(i)=inpfile(3:8)//'.plh'
 

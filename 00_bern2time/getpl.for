@@ -28,7 +28,7 @@ c
       rewind(15)
       do i=1,n
         read(15,'(a13)') inpfile
-        print*,inpfile
+        print*,'Processing '//inpfile//' ...'
         open(11,file=inpfile)
         stat=0
         do while (stat==0)

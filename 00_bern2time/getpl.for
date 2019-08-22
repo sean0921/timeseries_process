@@ -13,9 +13,13 @@ c
       logical alive
 
       inquire(file='fil.dat',exist=alive)
+#ifdef MINGW
+      if(alive) call system('del fil.dat')
+      call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
+#else
       if(alive) call system('rm -f fil.dat')
-      call system('(for f in $(ls FN?????1.OUT);do echo $f;done) > fil.d
-     +at')
+      call system('for f in $(ls FN??????.OUT);do echo $f;done>fil.dat')
+#endif
 
       open(12,file='tmp')
       open(15,file='fil.dat',status='old')
@@ -27,7 +31,8 @@ c
       end do
       rewind(15)
       do i=1,n
-        read(15,'(a13)') inpfile
+        read(15,'(a13)',iostat=stat) inpfile
+        if(stat/=0) exit
         print*,'Processing '//inpfile//' ...'
         open(11,file=inpfile)
         stat=0

@@ -43,14 +43,23 @@ c
         stop
       end if
 
+#ifdef MINGW
+      inquire(file='fil.dat',exist=alive)
+      if(alive) call system('del fil.dat')
+      inquire(file='error.msg',exist=alive)
+      if(alive) call system('del error.msg')
+      call system('del ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
+      call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
+#else
       inquire(file='fil.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
       inquire(file='error.msg',exist=alive)
       if(alive) call system('rm -f error.msg')
       call system('rm -f ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat
      +')
-      call system('for f in $(ls FN?????1.OUT);do echo $f;done >> fil.da
+      call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.da
      +t')
+#endif
 
       open(15,file='fil.dat',status='old')
       n=0
@@ -228,7 +237,11 @@ c***********************************************************************
           close(14)
           close(15)
           close(16)
+#ifdef MINGW
           temp='del '//out1//' '//out2//' '//out3//' '//out4//' '//inp
+#else
+          temp='rm -f '//out1//' '//out2//' '//out3//' '//out4//' '//inp
+#endif
           call system(temp)
           open(11,file='error.msg',position='append')
           write(11,'("Station ",a4," is not found!")')sta(i)

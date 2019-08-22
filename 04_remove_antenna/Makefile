@@ -8,6 +8,8 @@ FCFLAGS_MINGW 	:= -DMINGW
 OBJS		= remove_antenna plot_ts_2
 OBJS_MINGW	= remove_antenna.exe  plot_ts_2.exe
 
+PROJECT_PATH	= 04_remove_antenna
+
 all: $(OBJS)
 
 %: %.for
@@ -19,16 +21,18 @@ mingw: $(OBJS_MINGW)
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
 
 install: $(OBJS)
-	install -m 0755 $(OBJS) test/
+	install -d ../build/$(PROJECT_PATH)/
+	install -m 0755 $(OBJS) ../build/$(PROJECT_PATH)/
 
 mingw_install: $(OBJS_MINGW)
-	install -m 0755 $(OBJS_MINGW) test/
+	install -d ../build/$(PROJECT_PATH)/
+	install -m 0755 $(OBJS_MINGW) ../build/$(PROJECT_PATH)/
 
 help:
 	@echo "all:           compile program for Linux or other *nix-like platform"
 	@echo "mingw:         compile program for Win32 platform"
-	@echo "install:       install program for *nix-like platform to test/"
-	@echo "mingw_install: install program for Win32 platform to test/"
+	@echo "install:       install program for *nix-like platform to build path"
+	@echo "mingw_install: install program for Win32 platform to build path"
 
 clean:
 	rm -f $(OBJS) *.exe

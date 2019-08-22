@@ -44,13 +44,16 @@ c
       end if
 
       inquire(file='fil.dat',exist=alive)
-      if(alive) call system('del fil.dat')
+      if(alive) call system('rm -f fil.dat')
       inquire(file='error.msg',exist=alive)
-      if(alive) call system('del error.msg')
-      call system('del ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
-      call system('for %f in (FN?????P.OUT) do echo %f >> fil.dat')
+      if(alive) call system('rm -f error.msg')
+      call system('rm -f ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat
+     +')
+      call system('for f in $(ls FN?????1.OUT);do echo $f;done >> fil.da
+     +t')
 
       open(15,file='fil.dat',status='old')
+      n=0
       stat=0
       do while(stat==0)
         read(15,*,iostat=stat)
@@ -60,8 +63,9 @@ c
       rewind(15)
       allocate(outfile(n))
       do i=1,n
-        read(15,'(a12)') inpfile
-c       print*,inpfile
+        read(15,'(a12)',iostat=stat) inpfile
+        if(stat/=0) exit
+        print*,'Processing '//inpfile//' ...'
         outfile(i)=inpfile(3:7)//'.plh'
 
         open(11,file=inpfile)
@@ -70,6 +74,7 @@ c       print*,inpfile
         stat=0
         do while (stat==0)
           read(11,'(a)',iostat=stat) line
+          if(stat/=0) exit
           if(line(1:15)==' FILE TYP FREQ.') then
             t=0.
             t2=24.
@@ -85,21 +90,21 @@ c       print*,inpfile
             if(t2>=23.99999) t=t1
             write(12,'(f7.4)')t
           end if
-          if(line(24:24).eq.'X') then
+          if(line(24:24)=='X') then
             read(line,'(6x,a4)') sta1
-          else if(line(24:29).eq.'HEIGHT') then
+          else if(line(24:29)=='HEIGHT') then
             read(line,'(59x,f9.4,18x,f6.4)')height,herr
             sigh=herr*1000*5
-          else if(line(24:31).eq.'LATITUDE') then
+          else if(line(24:31)=='LATITUDE') then
             read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f6.4)')lat,latm,lats,
-     +      laterr
+     +laterr
             sign=laterr*1000*10
-          else if(line(24:32).eq.'LONGITUDE') then
+          else if(line(24:32)=='LONGITUDE') then
             read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f8.4)')lon,lonm,lons,
-     +      lonerr
+     +lonerr
             sige=lonerr*1000*10
             write(12,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)')sta1,lon,lonm,
-     +      lons,lat,latm,lats,height,sige,sign,sigh
+     +lons,lat,latm,lats,height,sige,sign,sigh
           end if
         end do
 
@@ -111,7 +116,7 @@ c       print*,inpfile
       open (11,file='sta-file')
       sn=0
       stat=0
-      do while (stat.eq.0)
+      do while (stat==0)
         read(11,*,iostat=stat)
         if(stat/=0) exit
         sn=sn+1
@@ -139,29 +144,30 @@ c***********************************************************************
       print*,'Start time_anal'
 
       do i=1,n
-        open (11,file=plhfil(i))
-        read(11,'(f7.4)')tt
-	dy(1:3)=plhfil(i)(3:5)
-	yr(3:4)=plhfil(i)(1:2)
-	if(yr(3:3)=='9') yr(1:2)='19'
-	if(yr(3:3)=='0') yr(1:2)='20'
-	if(yr(3:3)=='1') yr(1:2)='20'
-	t=yr//' '//dy
+        open(11,file=plhfil(i))
+        read(11,'(f7.4)',iostat=stat)tt
+        if(stat/=0)exit
+        dy(1:3)=plhfil(i)(3:5)
+        yr(3:4)=plhfil(i)(1:2)
+        if(yr(3:3)=='9') yr(1:2)='19'
+        if(yr(3:3)=='0') yr(1:2)='20'
+        if(yr(3:3)=='1') yr(1:2)='20'
+        t=yr//' '//dy
         stat=0
         do while (stat==0)
           read(11,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)',iostat=stat)sta1,
-     +    lon,lonm,lons,lat,latm,lats,hgh,ee,en,eh
+     +lon,lonm,lons,lat,latm,lats,hgh,ee,en,eh
           if(stat/=0) exit
           do j=1,sn
-	    if(sta1(1:4)==sta(j)(1:4)) then
+            if(sta1(1:4)==sta(j)(1:4)) then
               out(1:8)=sta(j)//'.out'
-	      open (12,file=out,position='append')
+              open (12,file=out,position='append')
               write(12,'(a8,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)')t,tt,lon,
-     +        lonm,lons,lat,latm,lats,hgh,ee,en,eh
-	      close(12)
+     +lonm,lons,lat,latm,lats,hgh,ee,en,eh
+              close(12)
             end if
           end do
-	end do
+        end do
         close(11,status='delete')
       end do
 
@@ -196,7 +202,7 @@ c***********************************************************************
         out3='ts_'//sta(i)//'_u_b.dat'
         out4='ts_'//sta(i)//'_b.dat'
 
-	open(12,file=inp)
+        open(12,file=inp)
         open(13,file=out1)
         open(14,file=out2)
         open(15,file=out3)
@@ -215,7 +221,7 @@ c***********************************************************************
           if(stat/=0) exit
           n=n+1
         end do
-	if(n==1) then
+        if(n==1) then
           jud=1
           close(12)
           close(13)
@@ -232,55 +238,55 @@ c***********************************************************************
         end if
         rewind(12)
         allocate(yr(n),dy(n),t(n),time(n),hgh(n),se(n),sn(n),sh(n),
-     +  rlon(n),rlat(n),dn(n),de(n),dh(n))
+     +rlon(n),rlat(n),dn(n),de(n),dh(n))
         do k=1,n
           read(12,'(2i4,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)')yr(k),dy(k),
-     +    t(k),lon,lonm,lons,lat,latm,lats,hgh(k),se(k),sn(k),sh(k)
+     +t(k),lon,lonm,lons,lat,latm,lats,hgh(k),se(k),sn(k),sh(k)
           rlon(k)=lon+lonm/60.+lons/3600.
           rlat(k)=lat+latm/60.+lats/3600.
-	  if(mod(yr(k),4)==0) then
-	    time(k)=real(yr(k))+(real(dy(k))-1.)/366.+t(k)/8784.
-	  else
-	    time(k)=real(yr(k))+(real(dy(k))-1.)/365.+t(k)/8760.
-	  end if
-	  avgn=avgn+rlat(k)
-	  avge=avge+rlon(k)
-	  avgh=avgh+hgh(k)
-	end do
+          if(mod(yr(k),4)==0) then
+            time(k)=real(yr(k))+(real(dy(k))-1.)/366.+t(k)/8784.
+          else
+            time(k)=real(yr(k))+(real(dy(k))-1.)/365.+t(k)/8760.
+          end if
+          avgn=avgn+rlat(k)
+          avge=avge+rlon(k)
+          avgh=avgh+hgh(k)
+        end do
 
- 	avgn=avgn/real(n)
-	avge=avge/real(n)
-	avgh=avgh/real(n)
+         avgn=avgn/real(n)
+        avge=avge/real(n)
+        avgh=avgh/real(n)
 
         call bubble_sort_n(time,yr,dy,t,rlon,rlat,hgh,se,sn,sh,n)
 
         adn=0
         ade=0
         adh=0
-	do k=1,n
-	  londt=cos(avgn*pi/180.)*latdt
-	  dn(k)=(rlat(k)-avgn)*latdt*1000000.-(fvn*(time(k)-time(1)))
-	  de(k)=(rlon(k)-avge)*londt*1000000.-(fve*(time(k)-time(1)))
-	  dh(k)=(hgh(k)-avgh)*1000.-(fvh*(time(k)-time(1)))
-	  adn=adn+dn(k)
-	  ade=ade+de(k)
-	  adh=adh+dh(k)
-	end do
-	adn=adn/real(n)
-	ade=ade/real(n)
-	adh=adh/real(n)
-	do k=1,n
-	  write(13,'(f10.5,1x,2f10.2)') time(k),dn(k)-adn,sn(k)
-	  write(14,'(f10.5,1x,2f10.2)') time(k),de(k)-ade,se(k)
-	  write(15,'(f10.5,1x,2f10.2)') time(k),dh(k)-adh,sh(k)
-	  write(16,'(2i4,f8.4,1x,6f10.2)') yr(k),dy(k),t(k),dn(k)-adn,
-     +    sn(k),de(k)-ade,se(k),dh(k)-adh,sh(k)
+        do k=1,n
+          londt=cos(avgn*pi/180.)*latdt
+          dn(k)=(rlat(k)-avgn)*latdt*1000000.-(fvn*(time(k)-time(1)))
+          de(k)=(rlon(k)-avge)*londt*1000000.-(fve*(time(k)-time(1)))
+          dh(k)=(hgh(k)-avgh)*1000.-(fvh*(time(k)-time(1)))
+          adn=adn+dn(k)
+          ade=ade+de(k)
+          adh=adh+dh(k)
+        end do
+        adn=adn/real(n)
+        ade=ade/real(n)
+        adh=adh/real(n)
+        do k=1,n
+          write(13,'(f10.5,1x,2f10.2)') time(k),dn(k)-adn,sn(k)
+          write(14,'(f10.5,1x,2f10.2)') time(k),de(k)-ade,se(k)
+          write(15,'(f10.5,1x,2f10.2)') time(k),dh(k)-adh,sh(k)
+          write(16,'(2i4,f8.4,1x,6f10.2)') yr(k),dy(k),t(k),dn(k)-adn,
+     +sn(k),de(k)-ade,se(k),dh(k)-adh,sh(k)
         end do
         close(12,status='delete')
-	close(13)
-	close(14)
-	close(15)
-	close(16)
+        close(13)
+        close(14)
+        close(15)
+        close(16)
 
         deallocate(yr,dy,t,time,hgh,se,sn,sh,rlon,rlat,dn,de,dh)
       end do

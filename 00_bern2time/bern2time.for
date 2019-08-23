@@ -48,14 +48,16 @@ c
       if(alive) call system('del fil.dat')
       inquire(file='error.msg',exist=alive)
       if(alive) call system('del error.msg')
-      call system('del ts_????_n_b.gmt ts_????_e_b.gmt ts_????_h_b.gmt')
+      call system('del ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_
+     +????_u_b.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else
       inquire(file='fil.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
       inquire(file='error.msg',exist=alive)
       if(alive) call system('rm -f error.msg')
-      call system('rm -f ts_????n_b.gmt ts_????e_b.gmt ts_????h_b.gmt')
+      call system('rm -f ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat t
+     +s_????_u_b.dat')
       call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.da
      +t')
 #endif
@@ -213,8 +215,8 @@ c***********************************************************************
         open(15,file=out3)
         open(16,file=out4)
 
-        write(16,*)'year doy    hr        dn      sn      de      se
-     +  dh      sh (unit: mm)'
+        write(16,'(a)')'year doy      hr       dn      sn      de      s
+     +e      dh      sh (unit: mm)'
 
         n=0
         avgn=0.

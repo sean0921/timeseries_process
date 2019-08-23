@@ -5,8 +5,8 @@ FC_MINGW	:= i686-w64-mingw32.static-gfortran
 FCFLAGS 	:= -std=legacy -g -static -cpp
 FCFLAGS_MINGW 	:= -DMINGW
 
-OBJS		= bern2time_FN  bern2time  getpl
-OBJS_MINGW	= bern2time_FN.exe  bern2time.exe  getpl.exe
+OBJS		= bern2time  getpl
+OBJS_MINGW	= bern2time.exe  getpl.exe
 
 PROJECT_PATH	= 00_bern2time
 

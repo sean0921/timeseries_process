@@ -182,7 +182,11 @@ c.......................................................................
 c^^^^^ ifdef MINGW
 
       do c=1,3
+#ifdef RAW
+        open(10,file='raw.inp',status='old')
+#else
         open(10,file='comfilt.inp',status='old')
+#endif
         open(11,file='fil.dat')
         do i=1,ns
           read(10,'(a4)')sta(i)

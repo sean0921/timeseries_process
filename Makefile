@@ -6,11 +6,11 @@ all:
 mingw:
 	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) mingw;cd -;done
 
-install:
-	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) install;cd -;done
+package:
+	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) package;cd -;done
 
-mingw_install:
-	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) mingw_install;cd -;done
+mingw_package:
+	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) mingw_package;cd -;done
 
 clean:
 	for i in $$(ls -d 0*/);do cd $$i;$(MAKE) clean;cd -;done

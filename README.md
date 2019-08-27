@@ -9,11 +9,14 @@
     - Type `make all` in each subfolder, it should be compiled (with debug symbol by default).
 
 * Win32 platform
-    - Not tested yet to built directly on Windows platform/MSYS2.
-    - It is suggest to install `mingw-w64`(for i686 or x86\_64) cross-compile toolchain, for e.g., [`mxe`](https://mxe.cc) is a good choice.
-    - MinGW example in "Makefile"s in this repo is designed for [MXE](https://mxe.cc), you can adapted your MinGW compiler command for that can fit your need.
-    - type `make mingw` manully in each subfolder, it should be compiled (with debug symbol by default).
-    - MinGW build mode is NOT automatically detected, you should type `make mingw` on your own, so that the content of the program will be correct
+    - cross compiling by `mingw-w64` toolchain on Unix-like Platform (Linux, FreeBSD...etc) (**Faster**)
+      + [MXE](https://mxe.cc) is a good choice, or you can search for `mingw-w64-*` prefix package by your package manager.
+      + MinGW example in "Makefile"s in this repo is designed for [MXE](https://mxe.cc), you can adapted your MinGW compiler command by set `FC_MINGW` variable, for that can fit your need.
+      + type `make mingw` in main folder, or manully in each subfolder, it should be compiled (with debug symbol by default).
+    - compiling in Windows 7/10
+      + [MSYS2](https://www.msys2.org) is a good choice, other tools are not tested or supported.
+      + You should adapted your MinGW compiler command by set `FC_MINGW` variable, for that can fit your need.
+      + type `make mingw` in main folder, or manully in each subfolder, it should be compiled (with debug symbol by default).
 
 ## Input file
 
@@ -21,7 +24,7 @@
     - `getpl.gout` (from `getpl`)
     - `sta-file` (from `getpl`)
 
-* `comfilt` (`raw`
+* `comfilt` (`raw`)
     - `comfilt.inp` (`raw.inp`, adapted from `sta-file`, format example:`comfilt.inp.example`/`raw.inp.example`)
 
 * `remove_{trend,period}`

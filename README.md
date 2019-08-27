@@ -18,6 +18,11 @@
       + You should adapted your MinGW compiler command by set `FC_MINGW` variable, for that can fit your need.
       + type `make mingw` in main folder, or manully in each subfolder, it should be compiled (with debug symbol by default).
 
+## Make a binary package (for easier to create tarballs)
+
+* `make package` (static linux binary)
+* `make mingw_package` (static win32 excutable)
+
 ## Input file
 
 * `bern2time`:
@@ -35,8 +40,3 @@
 
 * `fit`:
     - `fit.inp` (copied from `comfilt.inp`/`raw.inp`)
-
-## make a binary package (tarball)
-
-* `make package` (static linux binary)
-* `make mingw_package` (static win32 excutable)

@@ -11,7 +11,7 @@
       pi=atan(1.)*4
 
       open(1,file='remove.inp',status='old')
-      open(2,file='comfilt.para',status='old')
+      open(2,file='remove.para',status='old')
       ns=0
       stat=0
       do while (stat==0)

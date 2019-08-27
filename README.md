@@ -3,6 +3,7 @@
 ![](https://i.imgur.com/SmBl5UK.png)
 
 ## Compiling by GNU Fortran
+
 * Linux / Other Unix-like platform:
     - Install `make`(only tested in GNU make), `gfortran`(maybe included in `gcc` in some OS/distribution).
     - Type `make all` in each subfolder, it should be compiled (with debug symbol by default).
@@ -14,5 +15,25 @@
     - type `make mingw` manully in each subfolder, it should be compiled (with debug symbol by default).
     - MinGW build mode is NOT automatically detected, you should type `make mingw` on your own, so that the content of the program will be correct
 
-## Temporary Install path
-* Not really set yet, just make a temporary test directory named `test`, and place on there.
+## Input file
+
+* `bern2time`:
+    - `getpl.gout` (from `getpl`)
+    - `sta-file` (from `getpl`)
+
+* `comfilt` (`raw`
+    - `comfilt.inp` (`raw.inp`, adapted from `sta-file`, format example:`comfilt.inp.example`/`raw.inp.example`)
+
+* `remove_{trend,period}`
+    - `remove.inp` (copied from `comfilt.inp`/`raw.inp`)
+
+* `remove_attenna`:
+    - `remove.inp` (copied from `comfilt.inp`/`raw.inp`)
+
+* `fit`:
+    - `fit.inp` (copied from `comfilt.inp`/`raw.inp`)
+
+## make a binary package (tarball)
+
+* `make package` (static linux binary)
+* `make mingw_package` (static win32 excutable)

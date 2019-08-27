@@ -29,10 +29,12 @@ raw.exe: comfilt.for
 install: $(OBJS)
 	install -d ../build/$(PROJECT_PATH)/
 	install -m 0755 $(OBJS) ../build/$(PROJECT_PATH)/
+	install -m 0644 *.example ../build/$(PROJECT_PATH)/
 
 mingw_install: $(OBJS_MINGW)
 	install -d ../build/$(PROJECT_PATH)/
 	install -m 0755 $(OBJS_MINGW) ../build/$(PROJECT_PATH)/
+	install -m 0644 *.example ../build/$(PROJECT_PATH)/
 
 help:
 	@echo "all:           compile program for Linux or other *nix-like platform"

@@ -1,5 +1,5 @@
 c--     by Kuo-En Ching 2006.05.02
-c--              Update 2014.01.27
+c--              Update 2006.05.07
 c--     Considering that the post-seismic decay is LOG-type decay
 c
 c----comfilt.for---
@@ -7,7 +7,7 @@ c
       program comfilt
 
       implicit none
-      character infile*15,outfile*15,outfil1*15,line*500,sta*4
+      character infile*15,outfile*15,outfil1*15,line*150,sta*4
       character,allocatable::sym(:)*1
       real*8 mis,rr,pi
       double precision,allocatable::t(:),std(:),g(:,:),d(:),w(:),cal(:)
@@ -16,11 +16,7 @@ c
 
       pi=atan(1.)*4
 
-#ifdef RAW
-      open(1,file='raw.inp',status='old')
-#else
       open(1,file='comfilt.inp',status='old')
-#endif
       ns=0
       stat=0
       do while (stat==0)
@@ -42,14 +38,13 @@ c
             if(sym(i)=='C') m1=m1+1
             if(sym(i)=='P') m1=m1+1
             if(sym(i)=='L') m1=m1+2
-            if(sym(i)=='V') m1=m1+1
             if(sym(i)=='T') m1=m1+3
           end do
         end if
         do s2=1,3
-          if(s2==1) infile='ts_'//sta//'_e_o.dat'
-          if(s2==2) infile='ts_'//sta//'_n_o.dat'
-          if(s2==3) infile='ts_'//sta//'_u_o.dat'
+          if(s2==1) infile='ts_'//sta//'_e_b.dat'
+          if(s2==2) infile='ts_'//sta//'_n_b.dat'
+          if(s2==3) infile='ts_'//sta//'_u_b.dat'
           print*,'  Processing file: ',infile
           open(10,file=infile,status='old')
           n=0
@@ -89,9 +84,6 @@ c
                   g(i,tm)=H
                   tm=tm+1
                   g(i,tm)=H*(t(i)-teq(j))
-                else if(sym(j)=='V') then
-                  tm=tm+1
-                  g(i,tm)=H*(t(i)-teq(j))
                 else if(sym(j)=='T') then
                   tm=tm+1
                   g(i,tm)=H
@@ -121,7 +113,7 @@ c
           open(11,file=outfil1)
           cal=d-matmul(g,m)
           do i=1,n
-            if(dabs(std(i))>3*mis) cycle
+            if(sta/='ILAN'.and.dabs(std(i))>3*mis) cycle
             if(dabs(cal(i))>3*mis) cycle
             write(10,'(f10.5,f10.2)')t(i),cal(i)
             write(11,'(f10.5,2f10.2)')t(i),d(i),std(i)
@@ -134,15 +126,12 @@ c
       end do
       close(1)
 
-#ifdef RAW
       call filter(ns)
-#endif
       call fit(ns)
 
       stop
       end
 
-#ifdef RAW
 c.......................................................................
       subroutine filter(ns)
 
@@ -179,7 +168,6 @@ c.......................................................................
       inquire(file='tmp.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
 #endif
-c^^^^^ ifdef MINGW
 
       do c=1,3
         open(10,file='comfilt.inp',status='old')
@@ -318,15 +306,14 @@ c^^^^^ ifdef MINGW
 
       return
       end
-#endif
-c^^^^^ ifdef RAW
+
 c.......................................................................
       subroutine fit(ns)
 
       implicit none
       integer i,j,s1,s2,m1,m2,m3,n,ns,stat,H,neq
       integer tyeq,tm,tm2,tm3,ty
-      character infile*15,out*15,sta(ns)*4,line*500,fmt*30,cm1*2
+      character infile*15,out*15,sta(ns)*4,line*150,fmt*30,cm1*2
       character,allocatable::sym(:)*1
       real*8 mis,rr,ve,vn,vh,se,sn,sh,pi
       double precision,allocatable::t(:),g(:,:),d(:),w(:),m(:),sg(:),
@@ -337,15 +324,9 @@ c.......................................................................
 
       print*,'Start fit....'
 
-#ifdef RAW
-      open(1,file='raw.para')
-      open(2,file='raw.out')
-      open(3,file='raw.inp',status='old')
-#else
       open(1,file='comfilt.para')
       open(2,file='comfilt.out')
       open(3,file='comfilt.inp',status='old')
-#endif
       write(2,'("Number of stations: ", i5)')ns
       do s1=1,ns
         m1=6
@@ -368,9 +349,6 @@ c.......................................................................
               m1=m1+2
               m2=m2+1
               m3=m3+1
-            else if(sym(i)=='V') then
-              m1=m1+1
-              m3=m3+1
             else if(sym(i)=='T') then
               m1=m1+3
               m2=m2+1
@@ -381,9 +359,9 @@ c.......................................................................
         allocate(ce(m2),cn(m2),ch(m2),ces(m2),cns(m2),chs(m2),pve(m3),
      +  pvn(m3),pvh(m3),pves(m3),pvns(m3),pvhs(m3))
         do s2=1,3
-          if(s2==1) infile='ts_'//sta(s1)//'_e_c.dat'
-          if(s2==2) infile='ts_'//sta(s1)//'_n_c.dat'
-          if(s2==3) infile='ts_'//sta(s1)//'_u_c.dat'
+          if(s2==1) infile='ts_'//sta(s1)//'_e_f.dat'
+          if(s2==2) infile='ts_'//sta(s1)//'_n_f.dat'
+          if(s2==3) infile='ts_'//sta(s1)//'_u_f.dat'
           print*,'  Processing file: ',infile
           open(10,file=infile,status='old')
           n=0
@@ -421,9 +399,6 @@ c.......................................................................
                 else if(sym(j)=='L') then
                   tm=tm+1
                   g(i,tm)=H
-                  tm=tm+1
-                  g(i,tm)=H*(t(i)-teq(j))
-                else if(sym(j)=='V') then
                   tm=tm+1
                   g(i,tm)=H*(t(i)-teq(j))
                 else if(sym(j)=='T') then
@@ -470,7 +445,7 @@ c.......................................................................
           if(s2==1) then
             ve=m(2)
             se=sg(2)
-            tm=6
+            tm=2
             tm2=0
             tm3=0
             if(neq>0) then
@@ -486,30 +461,15 @@ c.......................................................................
                   tm3=tm3+1
                   ce(tm2)=m(tm-1)
                   ces(tm2)=sg(tm-1)
-                  if(tm3==1) then
-                    pve(tm3)=m(tm)+m(2)
-                    pves(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pve(tm3)=m(tm)+pve(tm3-1)
-                    pves(tm3)=sqrt(sg(tm)**2+pves(tm3-1)**2)
-                  end if
-                else if(sym(i)=='V') then
-                  tm=tm+1
-                  tm3=tm3+1
-                  if(tm3==1) then
-                    pve(tm3)=m(tm)+m(2)
-                    pves(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pve(tm3)=m(tm)+pve(tm3-1)
-                    pves(tm3)=sqrt(sg(tm)**2+pves(tm3-1)**2)
-                  end if
+                  pve(tm3)=m(tm)+m(2)
+                  pves(tm3)=sqrt(sg(tm)**2+sg(2)**2)
                 else if(sym(i)=='T') then
                   tm=tm+3
                   tm2=tm2+1
                   tm3=tm3+1
                   ce(tm2)=m(tm-2)+m(tm)*log10(0.001)
                   ces(tm2)=sg(tm-2)
-                  if(tm3==1) then
+                  if(i==1) then
                     pve(tm3)=m(tm-1)+ve
                     pves(tm3)=sqrt(sg(tm-1)**2+se**2)
                   else
@@ -522,7 +482,7 @@ c.......................................................................
           else if(s2==2) then
             vn=m(2)
             sn=sg(2)
-            tm=6
+            tm=2
             tm2=0
             tm3=0
             if(neq>0) then
@@ -538,30 +498,15 @@ c.......................................................................
                   tm3=tm3+1
                   cn(tm2)=m(tm-1)
                   cns(tm2)=sg(tm-1)
-                  if(tm3==1) then
-                    pvn(tm3)=m(tm)+m(2)
-                    pvns(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pvn(tm3)=m(tm)+pvn(tm3-1)
-                    pvns(tm3)=sqrt(sg(tm)**2+pvns(tm3-1)**2)
-                  end if
-                else if(sym(i)=='V') then
-                  tm=tm+1
-                  tm3=tm3+1
-                  if(tm3==1) then
-                    pvn(tm3)=m(tm)+m(2)
-                    pvns(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pvn(tm3)=m(tm)+pvn(tm3-1)
-                    pvns(tm3)=sqrt(sg(tm)**2+pvns(tm3-1)**2)
-                  end if
+                  pvn(tm3)=m(tm)+m(2)
+                  pvns(tm3)=sqrt(sg(tm)**2+sg(2)**2)
                 else if(sym(i)=='T') then
                   tm=tm+3
                   tm2=tm2+1
                   tm3=tm3+1
                   cn(tm2)=m(tm-2)+m(tm)*log10(0.001)
                   cns(tm2)=sg(tm-2)
-                  if(tm3==1) then
+                  if(i==1) then
                     pvn(tm3)=m(tm-1)+vn
                     pvns(tm3)=sqrt(sg(tm-1)**2+sn**2)
                   else
@@ -574,7 +519,7 @@ c.......................................................................
           else if(s2==3) then
             vh=m(2)
             sh=sg(2)
-            tm=6
+            tm=2
             tm2=0
             tm3=0
             if(neq>0) then
@@ -590,30 +535,15 @@ c.......................................................................
                   tm3=tm3+1
                   ch(tm2)=m(tm-1)
                   chs(tm2)=sg(tm-1)
-                  if(tm3==1) then
-                    pvh(tm3)=m(tm)+m(2)
-                    pvhs(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pvh(tm3)=m(tm)+pvh(tm3-1)
-                    pvhs(tm3)=sqrt(sg(tm)**2+pvhs(tm3-1)**2)
-                  end if
-                else if(sym(i)=='V') then
-                  tm=tm+1
-                  tm3=tm3+1
-                  if(tm3==1) then
-                    pvh(tm3)=m(tm)+m(2)
-                    pvhs(tm3)=sqrt(sg(tm)**2+sg(2)**2)
-                  else
-                    pvh(tm3)=m(tm)+pvh(tm3-1)
-                    pvhs(tm3)=sqrt(sg(tm)**2+pvhs(tm3-1)**2)
-                  end if
+                  pvh(tm3)=m(tm)+m(2)
+                  pvhs(tm3)=sqrt(sg(tm)**2+sg(2)**2)
                 else if(sym(i)=='T') then
                   tm=tm+3
                   tm2=tm2+1
                   tm3=tm3+1
                   ch(tm2)=m(tm-2)+m(tm)*log10(0.001)
                   chs(tm2)=sg(tm-2)
-                  if(tm3==1) then
+                  if(i==1) then
                     pvh(tm3)=m(tm-1)+vh
                     pvhs(tm3)=sqrt(sg(tm-1)**2+sh**2)
                   else
@@ -633,7 +563,7 @@ c.......................................................................
             if(sym(i)=='P') ty=ty-1
           end do
         end if
-        write(2,'("# ",a4,"  Number of Events: ",i3)')sta(s1),ty
+        write(2,'("# ",a4,"  Recorded Number of EQ: ",i3)')sta(s1),ty
         write(2,'("    secular motion (mm/yr):")')
         write(2,'("      E component: ",f8.3," +-",f8.3)')ve,se
         write(2,'("      N component: ",f8.3," +-",f8.3)')vn,sn
@@ -665,17 +595,6 @@ c.......................................................................
      +        cns(tm2)
               write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),
      +        chs(tm2)
-               write(2,'("    linear velocity (mm/yr):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3)
-     +        ,pves(tm3)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3)
-     +        ,pvns(tm3)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3)
-     +        ,pvhs(tm3)
-            else if(sym(i)=='V') then
-              tm3=tm3+1
-              write(2,'("  ! velocity change time (yr):",f11.4)')
-     +        teq(i)
                write(2,'("    linear velocity (mm/yr):")')
               write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3)
      +        ,pves(tm3)

@@ -5,8 +5,8 @@ FC_MINGW	:= i686-w64-mingw32.static-gfortran
 FCFLAGS 	:= -std=legacy -g -static -cpp
 FCFLAGS_MINGW 	:= -DMINGW
 
-OBJS		= comfilt  plot_ts
-OBJS_MINGW	= comfilt.exe  plot_ts.exe
+OBJS		= comfilt  plot_ts  raw  comfilt_trend
+OBJS_MINGW	= comfilt.exe  plot_ts.exe  raw.exe  comfilt_trend.exe
 
 PROJECT_PATH	= 01_raw
 
@@ -15,10 +15,16 @@ all: $(OBJS)
 %: %.for
 	$(FC) $(FCFLAGS) -o $@ $^
 
+raw: comfilt.for
+	$(FC) $(FCFLAGS) -DRAW -o $@ $^
+
 mingw: $(OBJS_MINGW)
 
 %.exe: %.for
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
+
+raw.exe: comfilt.for
+	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -DRAW -o $@ $^
 
 install: $(OBJS)
 	install -d ../build/$(PROJECT_PATH)/

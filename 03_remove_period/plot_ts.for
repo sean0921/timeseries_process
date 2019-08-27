@@ -204,9 +204,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
      +0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(9),ps
             inquire(file=file(12),exist=alive)
             if(alive) write(11,'("gmt psxy ",a15," -JX -R -W3,0/180/0 -P
-     + -O -V2 >> ",a10)')file(12),ps
+     + -K -O -V2 >> ",a10)')file(12),ps
           end if
         end do
+        write(11,'("gmt psxy -R -J -O -T >> ",a10)')ps
         write(11,'("gmt psconvert -Tg ",a10)')ps
 #ifdef MINGW
         write(11,'("del sym gmt.history gmt.conf")')

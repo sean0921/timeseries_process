@@ -5,8 +5,8 @@ FC_MINGW	:= i686-w64-mingw32.static-gfortran
 FCFLAGS 	:= -std=legacy -g -static -cpp
 FCFLAGS_MINGW 	:= -DMINGW
 
-OBJS		= fit  plot_ts_2
-OBJS_MINGW	= fit.exe  plot_ts_2.exe
+OBJS		= fit  plot_ts
+OBJS_MINGW	= fit.exe  plot_ts.exe
 
 PROJECT_PATH	= 06_Fit_velocity
 
@@ -15,9 +15,15 @@ all: $(OBJS)
 %: %.for
 	$(FC) $(FCFLAGS) -o $@ $^
 
+plot_ts: ../common/plot_ts.for
+	$(FC) $(FCFLAGS) -o $@ $^
+
 mingw: $(OBJS_MINGW)
 
 %.exe: %.for
+	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
+
+plot_ts.exe: ../common/plot_ts.for
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
 
 package: $(OBJS)

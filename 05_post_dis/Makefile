@@ -4,10 +4,10 @@ all:
 mingw:
 	@printf "\033[1;31mNothing to Make!\033[0m\n"
 
-install:
+package:
 	@printf "\033[1;31mNoting to Install!\033[0m\n"
 
-mingw_install:
+mingw_package:
 	@printf "\033[1;31mNoting to Install!\033[0m\n"
 
 clean:

@@ -15,9 +15,15 @@ all: $(OBJS)
 %: %.for
 	$(FC) $(FCFLAGS) -o $@ $^
 
+plot_ts: ../common/plot_ts.for
+	$(FC) $(FCFLAGS) -o $@ $^
+
 mingw: $(OBJS_MINGW)
 
 %.exe: %.for
+	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
+
+plot_ts.exe: ../common/plot_ts.for
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
 
 package: $(OBJS)

@@ -13,8 +13,8 @@ AC_PREFIX_PROGRAM(["$PWD"/build])
 AC_LANG(Fortran)
 AC_PROG_FC
 AC_PROG_F77
-FCFLAGS="-std=legacy -g -static -cpp"
-FFLAGS="-std=legacy -g -static -cpp"
+FCFLAGS=" -std=legacy -g -static -cpp"
+FFLAGS=" -std=legacy -g -static -cpp"
 AC_PROG_INSTALL
 
 # Checks for libraries.
@@ -22,6 +22,16 @@ AC_PROG_INSTALL
 # Checks for header files.
 
 # Checks for typedefs, structures, and compiler characteristics.
+# Populate $host_cpu, $host_os, etc.
+AC_CANONICAL_HOST
+case $host_os in
+  *mingw*)
+FCFLAGS+=" -DMINGW"
+FFLAGS+=" -DMINGW"
+    ;;
+  *)
+    ;;
+esac
 
 # Checks for library functions.
 

@@ -18,7 +18,7 @@ all: $(OBJS)
 raw: comfilt.for
 	$(FC) $(FCFLAGS) -DRAW -o $@ $^
 
-plot_ts: ../common/plot_ts.for
+plot_ts: ../util/plot_ts.for
 	$(FC) $(FCFLAGS) -o $@ $^
 
 mingw: $(OBJS_MINGW)
@@ -29,7 +29,7 @@ mingw: $(OBJS_MINGW)
 raw.exe: comfilt.for
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -DRAW -o $@ $^
 
-plot_ts.exe: ../common/plot_ts.for
+plot_ts.exe: ../util/plot_ts.for
 	$(FC_MINGW) $(FCFLAGS) $(FCFLAGS_MINGW) -o $@ $^
 
 package: $(OBJS)

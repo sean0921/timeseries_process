@@ -1,13 +1,7 @@
 ## GNU makefile
 
-FC              = @FC@
-FCFLAGS         = @FCFLAGS@
-OBJS		= remove_period
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
+bin_PROGRAMS=remove_period
+remove_period_SOURCES=remove_period.for
 
 clean-local:
 	rm -f $(OBJS) *.exe

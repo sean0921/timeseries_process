@@ -2,12 +2,8 @@
 
 FC              = @FC@
 FCFLAGS         = @FCFLAGS@
-OBJS		= fit
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
+bin_PROGRAMS=fit
+fit_SOURCES=fit.for
 
 clean-local:
 	rm -f $(OBJS) *.exe

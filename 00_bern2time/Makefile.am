@@ -1,14 +1,8 @@
 ## GNU makefile
 
-FC		= @FC@
-FCFLAGS 	= @FCFLAGS@
-
-OBJS		= bern2time  getpl
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
+bin_PROGRAMS=bern2time getpl
+bern2time_SOURCES=bern2time.for
+getpl_SOURCES=getpl.for
 
 clean-local:
 	rm -f $(OBJS) *.exe

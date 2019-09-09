@@ -1,13 +1,7 @@
 ## GNU makefile
 
-FC              = @FC@
-FCFLAGS         = @FCFLAGS@
-OBJS		= remove_antenna
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
+bin_PROGRAMS=remove_antenna
+remove_antenna_SOURCES=remove_antenna.for
 
 clean-local:
 	rm -f $(OBJS) *.exe

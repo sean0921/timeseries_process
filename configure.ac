@@ -7,10 +7,12 @@ AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
 
-AC_LANG(Fortran)
 # Checks for programs.
+AC_LANG(Fortran)
 AC_PROG_FC
+AC_PROG_F77
 FCFLAGS="-std=legacy -g -static -cpp"
+FFLAGS="-std=legacy -g -static -cpp"
 AC_PROG_INSTALL
 
 # Checks for libraries.

@@ -1,14 +1,8 @@
 ## GNU makefile
 
-FC		= @FC@
-FCFLAGS 	= @FCFLAGS@
-
-OBJS		= comfilt comfilt_trend
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
+bin_PROGRAMS=comfilt comfilt_trend
+comfilt_SOURCES=comfilt.for
+comfilt_trend_SOURCES=comfilt_trend.for
 
 clean-local:
 	rm -f $(OBJS) *.exe

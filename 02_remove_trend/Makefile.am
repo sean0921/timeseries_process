@@ -1,14 +1,5 @@
 ## GNU makefile
 
-FC              = @FC@
-FCFLAGS         = @FCFLAGS@
-
-OBJS		= remove_trend
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
-
-clean-local:
-	rm -f $(OBJS) *.exe
+TARGETdir=../build/$$(basename "$$PWD")
+TARGET_PROGRAMS=remove_trend
+remove_trend_SOURCES=remove_trend.for

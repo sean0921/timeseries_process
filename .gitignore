@@ -2,7 +2,7 @@ test/
 build/
 
 ############################ AUTOTOOLS #############################
-https://github.com/github/gitignore/blob/master/Autotools.gitignore
+## https://github.com/github/gitignore/blob/master/Autotools.gitignore
 
 # http://www.gnu.org/software/automake
 

@@ -6,6 +6,8 @@ AC_INIT([timeseries_process], [2019.909.0], [sean.li.shin.ho@gmail.com])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
+AC_PREFIX_DEFAULT(["$PWD"/build])
+AC_PREFIX_PROGRAM(["$PWD"/build])
 
 # Checks for programs.
 AC_LANG(Fortran)

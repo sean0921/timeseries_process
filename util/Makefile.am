@@ -1,13 +1,5 @@
 ## GNU makefile
 
-FC              = @FC@
-FCFLAGS         = @FCFLAGS@
-OBJS		= plot_ts
-
-all: $(OBJS)
-
-$(OBJS): %: %.for
-	$(FC) $(FCFLAGS) -o $@ $^
-
-clean-local:
-	rm -f $(OBJS) *.exe
+TARGETdir=../build/$$(basename "$$PWD")
+TARGET_PROGRAMS=plot_ts
+plot_ts_SOURCES=plot_ts.for

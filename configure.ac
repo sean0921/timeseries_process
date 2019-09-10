@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([timeseries_process], [2019.909.1], [https://github.com/sean0921/timeseries_process])
+AC_INIT([timeseries_process], [2019.911.0], [https://github.com/sean0921/timeseries_process])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
@@ -15,7 +15,24 @@ AC_PROG_FC
 AC_PROG_F77
 FCFLAGS=" -std=legacy -g -static -cpp"
 FFLAGS=" -std=legacy -g -static -cpp"
+## https://stackoverflow.com/questions/7490978/
+AC_CHECK_PROG(IMAGEMAGICK_CHECK,convert,yes)
+AS_IF([test x"$IMAGEMAGICK_CHECK" != x"yes"], [AC_MSG_ERROR([Please install imagemagick/graphicmagick before configuring.])])
+AC_CANONICAL_HOST
+AM_PROG_AS
 AC_PROG_INSTALL
+
+## https://stackoverflow.com/questions/15398632
+PLATF=""
+AS_CASE([$host_os], [*mingw*], [PLATF="WINDOWS"])
+AM_CONDITIONAL([IS_WINDOWS], [test "$PLATF" = "WINDOWS"])
+
+if [[ $host = 'i686-w64-mingw32' ]] || [[ $host = 'x86_64-w64-mingw32' ]] || [[ $host = 'i686-w64-mingw32.static' ]] || [[ $host = 'x86_64-w64-mingw32.static' ]] || [[ $host = 'i686-w64-mingw32.shared' ]] || [[ $host = 'x86_64-w64-mingw32.shared' ]]
+then
+AC_SUBST(WINDRES,["$host_alias"-windres])
+else
+AC_SUBST(WINDRES,[windres])
+fi
 
 # Checks for libraries.
 
@@ -23,7 +40,6 @@ AC_PROG_INSTALL
 
 # Checks for typedefs, structures, and compiler characteristics.
 # Populate $host_cpu, $host_os, etc.
-AC_CANONICAL_HOST
 case $host_os in
   *mingw*)
 FCFLAGS+=" -DMINGW"
@@ -42,5 +58,6 @@ AC_CONFIG_FILES([00_bern2time/Makefile
                  04_remove_antenna/Makefile
                  05_Fit_velocity/Makefile
                  util/Makefile
+                 common/version.rc
                  Makefile])
 AC_OUTPUT

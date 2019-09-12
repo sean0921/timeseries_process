@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([timeseries_process], [2019.911.3], [https://github.com/sean0921/timeseries_process])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
 AC_PREFIX_DEFAULT(["$PWD"/build])

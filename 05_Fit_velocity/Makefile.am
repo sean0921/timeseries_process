@@ -2,7 +2,7 @@
 
 TARGETdir=../build/$$(basename "$$PWD")
 TARGET_PROGRAMS=fit
-fit_SOURCES=fit.for
+fit_SOURCES=fit.for ../common/int2char.for ../common/lsqr.for
 
 if IS_WINDOWS
 fit_DEPENDENCIES=fit.rc.o

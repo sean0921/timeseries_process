@@ -2,8 +2,8 @@
 
 TARGETdir=../build/$$(basename "$$PWD")
 TARGET_PROGRAMS=bern2time getpl
-bern2time_SOURCES=bern2time.for
-getpl_SOURCES=getpl.for
+bern2time_SOURCES=bern2time.for ../common/bubblesort.for
+getpl_SOURCES=getpl.for ../common/bubblesort.for
 
 if IS_WINDOWS
 bern2time_DEPENDENCIES=bern2time.rc.o

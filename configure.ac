@@ -15,11 +15,6 @@ AC_PROG_FC(gfortran)
 AC_PROG_F77(gfortran)
 FCFLAGS=" -std=legacy -g -cpp"
 FFLAGS="  -std=legacy -g -cpp"
-## https://stackoverflow.com/questions/7490978/
-AC_CHECK_PROG(INKSCAPE_CHECK,inkscape,yes)
-AS_IF([test x"$INKSCAPE_CHECK" != x"yes"], [AC_MSG_ERROR([Please install Inkscape before configuring.])])
-AC_CHECK_PROG(IMAGEMAGICK_CHECK,convert,yes)
-AS_IF([test x"$IMAGEMAGICK_CHECK" != x"yes"], [AC_MSG_ERROR([Please install imagemagick/graphicmagick before configuring.])])
 AC_CANONICAL_HOST
 AM_PROG_AS
 AC_PROG_INSTALL
@@ -46,6 +41,11 @@ case $host_os in
   *mingw*)
 FCFLAGS+=" -DMINGW"
 FFLAGS+=" -DMINGW"
+## https://stackoverflow.com/questions/7490978/
+AC_CHECK_PROG(INKSCAPE_CHECK,inkscape,yes)
+AS_IF([test x"$INKSCAPE_CHECK" != x"yes"], [AC_MSG_ERROR([Please install Inkscape before configuring.])])
+AC_CHECK_PROG(IMAGEMAGICK_CHECK,convert,yes)
+AS_IF([test x"$IMAGEMAGICK_CHECK" != x"yes"], [AC_MSG_ERROR([Please install imagemagick/graphicmagick before configuring.])])
     ;;
   *)
     ;;

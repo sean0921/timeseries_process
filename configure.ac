@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([timeseries_process], [2019.911.3], [https://github.com/sean0921/timeseries_process])
-AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+AC_INIT([timeseries_process], [2019.913.0], [https://github.com/sean0921/timeseries_process])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
 AC_PREFIX_DEFAULT(["$PWD"/build])
@@ -11,10 +11,10 @@ AC_PREFIX_PROGRAM(["$PWD"/build])
 
 # Checks for programs.
 AC_LANG(Fortran)
-AC_PROG_FC
-AC_PROG_F77
-FCFLAGS=" -std=legacy -g -static -cpp"
-FFLAGS=" -std=legacy -g -static -cpp"
+AC_PROG_FC(gfortran)
+AC_PROG_F77(gfortran)
+FCFLAGS=" -std=legacy -g -cpp"
+FFLAGS="  -std=legacy -g -cpp"
 AC_CANONICAL_HOST
 AM_PROG_AS
 AC_PROG_INSTALL

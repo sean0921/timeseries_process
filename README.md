@@ -1,5 +1,6 @@
 # Time Series Processing Tools
 
+![](https://travis-ci.org/holishing/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/JSbZLaM.png)
 
 ## Compiling by GNU Fortran and GNU Autotools

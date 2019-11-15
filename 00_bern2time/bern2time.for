@@ -268,7 +268,7 @@ c***********************************************************************
           avgh=avgh+hgh(k)
         end do
 
-         avgn=avgn/real(n)
+        avgn=avgn/real(n)
         avge=avge/real(n)
         avgh=avgh/real(n)
 

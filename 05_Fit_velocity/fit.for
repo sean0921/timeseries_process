@@ -153,7 +153,7 @@
             nn(s1)=1
             do i=2,n
               if((t(i)-t(i-1))>0.5) nn(s1)=nn(s1)+1
-              if((t(i)-t(i-1))<0.5) t(i)=t(i-1)
+c              if((t(i)-t(i-1))<0.5) t(i)=t(i-1)
             end do
           end if
 

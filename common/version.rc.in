@@ -1,15 +1,15 @@
 1 VERSIONINFO
-FILEVERSION     2019,9,11,4
-PRODUCTVERSION  2019,9,11,4
+FILEVERSION     2019,9,11,5
+PRODUCTVERSION  2019,9,11,5
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
     BLOCK "040904E4"
     BEGIN
-      VALUE "CompanyName", "Department of Earth Sciences, NCKU"
+      VALUE "CompanyName", "Seismology Lab, Department of Earth Sciences, NCKU"
       VALUE "FileDescription", "Severnal Tools about Time Series Process (compiled by GNU Fortran and built by GNU AutoTools)"
       VALUE "FileVersion", "@VERSION"
-      VALUE "LegalCopyright", "Seismology Lab"
+      VALUE "LegalCopyright", "Seismology Lab, Department of Earth Sciences, NCKU"
       VALUE "ProductName", "Time Series Process Toolchain"
       VALUE "ProductVersion", "@VERSION@"
     END

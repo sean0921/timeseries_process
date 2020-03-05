@@ -7,10 +7,7 @@
       character infile*15,out*15,line*150,fmt*30,cm1*2,staa*4
       character,allocatable::sym(:)*1,sta(:)*4
       real*8 mis,rr,ve,vn,vh,se,sn,sh,lonn,latt,rt,c
-      double precision,allocatable::t(:),g(:,:),d(:),w(:),m(:),sg(:),
-     +teq(:),ce(:),cn(:),ch(:),ces(:),cns(:),chs(:),pve(:),pvn(:),pvh(:)
-     +,pves(:),pvns(:),pvhs(:),std(:),cal(:),t1(:),tf(:),dt(:),
-     +vee(:),vnn(:),vhh(:),see(:),snn(:),shh(:)
+      double precision,allocatable::t(:),g(:,:),d(:),w(:),m(:),sg(:),teq(:),ce(:),cn(:),ch(:),ces(:),cns(:),chs(:),pve(:),pvn(:),pvh(:),pves(:),pvns(:),pvhs(:),std(:),cal(:),t1(:),tf(:),dt(:),vee(:),vnn(:),vhh(:),see(:),snn(:),shh(:)
 
       open(1,file='fit.inp',status='old')
       ns=0
@@ -58,8 +55,7 @@
             end if
           end do
         end if
-        allocate(ce(m2),cn(m2),ch(m2),ces(m2),cns(m2),chs(m2),pve(m3),
-     +  pvn(m3),pvh(m3),pves(m3),pvns(m3),pvhs(m3))
+        allocate(ce(m2),cn(m2),ch(m2),ces(m2),cns(m2),chs(m2),pve(m3),pvn(m3),pvh(m3),pves(m3),pvns(m3),pvhs(m3))
         do s2=1,3
           if(s2==1) infile='ts_'//sta(s1)//'_e_o.dat'
           if(s2==2) infile='ts_'//sta(s1)//'_n_o.dat'
@@ -197,8 +193,7 @@ c            if(abs(rt-t(n))<.001) exit
                   c=c+m(tm)*(rt-teq(j))
                 else if(rt>teq(j).and.sym(j)=='T') then
                   tm=tm+3
-                  c=c+m(tm-2)+m(tm-1)*(rt-teq(j))+
-     +            m(tm)*(log10(1+(rt-teq(j))))
+                  c=c+m(tm-2)+m(tm-1)*(rt-teq(j))+m(tm)*(log10(1+(rt-teq(j))))
                 end if
               end do
             end if
@@ -389,64 +384,42 @@ c            if(abs(rt-t(n))<.001) exit
           do i=1,neq
             if(sym(i)=='C') then
               tm2=tm2+1
-              write(2,'("  ! earthquake occurred time (yr):",f11.4)')
-     +        teq(i)
+              write(2,'("  ! earthquake occurred time (yr):",f11.4)')teq(i)
               write(2,'("    coseismic displacements (mm):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),
-     +        ces(tm2)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),
-     +        cns(tm2)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),
-     +        chs(tm2)
+              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),ces(tm2)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),cns(tm2)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),chs(tm2)
             else if(sym(i)=='L') then
               tm2=tm2+1
               tm3=tm3+1
-              write(2,'("  ! earthquake occurred time (yr):",f11.4)')
-     +        teq(i)
+              write(2,'("  ! earthquake occurred time (yr):",f11.4)')teq(i)
               write(2,'("    coseismic displacements (mm):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),
-     +        ces(tm2)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),
-     +        cns(tm2)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),
-     +        chs(tm2)
-               write(2,'("    linear velocity (mm/yr):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3)
-     +        ,pves(tm3)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3)
-     +        ,pvns(tm3)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3)
-     +        ,pvhs(tm3)
+              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),ces(tm2)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),cns(tm2)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),chs(tm2)
+              write(2,'("    linear velocity (mm/yr):")')
+              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3),pves(tm3)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3),pvns(tm3)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3),pvhs(tm3)
             else if(sym(i)=='V') then
               tm3=tm3+1
-              write(2,'("  ! velocity change time (yr):",f11.4)')
-     +        teq(i)
-               write(2,'("    linear velocity (mm/yr):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3)
-     +        ,pves(tm3)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3)
-     +        ,pvns(tm3)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3)
-     +        ,pvhs(tm3)
+              write(2,'("  ! velocity change time (yr):",f11.4)')teq(i)
+              write(2,'("    linear velocity (mm/yr):")')
+              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3),pves(tm3)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3),pvns(tm3)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3),pvhs(tm3)
             else if(sym(i)=='T') then
               tm2=tm2+1
               tm3=tm3+1
-              write(2,'("  ! earthquake occurred time (yr):",f11.4)')
-     +        teq(i)
+              write(2,'("  ! earthquake occurred time (yr):",f11.4)')teq(i)
               write(2,'("    coseismic displacements (mm):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),
-     +        ces(tm2)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),
-     +        cns(tm2)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),
-     +        chs(tm2)
-               write(2,'("    linear velocity (mm/yr):")')
-              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3)
-     +        ,pves(tm3)
-              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3)
-     +        ,pvns(tm3)
-              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3)
-     +        ,pvhs(tm3)
+              write(2,'("      E component: ",f8.3," +-",f8.3)')ce(tm2),ces(tm2)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')cn(tm2),cns(tm2)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')ch(tm2),chs(tm2)
+              write(2,'("    linear velocity (mm/yr):")')
+              write(2,'("      E component: ",f8.3," +-",f8.3)')pve(tm3),pves(tm3)
+              write(2,'("      N component: ",f8.3," +-",f8.3)')pvn(tm3),pvns(tm3)
+              write(2,'("      U component: ",f8.3," +-",f8.3)')pvh(tm3),pvhs(tm3)
            end if
          end do
         end if
@@ -468,9 +441,7 @@ c            if(abs(rt-t(n))<.001) exit
           if(statt/=0) exit
           read(98,*,iostat=statt)staa,lonn,latt
           if(sta(i).eq.staa) then
-             write(99,'(a5,2x,2f8.4,6f10.2,2i5,3f10.4)')sta(i),lonn,
-     +       latt,vee(i),vnn(i),vhh(i),see(i),snn(i),shh(i),nn(i),
-     +       tn(i),dt(i),t1(i),tf(i)
+             write(99,'(a5,2x,2f8.4,6f10.2,2i5,3f10.4)')sta(i),lonn,latt,vee(i),vnn(i),vhh(i),see(i),snn(i),shh(i),nn(i),tn(i),dt(i),t1(i),tf(i)
              exit
           end if
         end do

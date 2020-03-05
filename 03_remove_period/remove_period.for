@@ -129,15 +129,12 @@
                 end if
                 if(j<7)then
                   cal=cal+g(j)*m(j)
-                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.
-     +          sym(j-6)=='C')then
+                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.sym(j-6)=='C')then
                   cycle
-                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.
-     +          sym(j-6)=='L')then
+                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.sym(j-6)=='L')then
                   ty=1
                   cycle
-                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.
-     +          sym(j-6)=='T')then
+                else if(j>=7.and.abs(teq(j-6)-2010.16619)<0.003.and.sym(j-6)=='T')then
                   nT=1
                   ty=1
                   cycle

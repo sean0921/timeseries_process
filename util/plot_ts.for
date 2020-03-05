@@ -58,9 +58,7 @@ c        write(11,'("")')
 c        write(11,'("set -eux")')
 #endif
         write(11,'("")')
-        write(11,'("gmt gmtset FONT_ANNOT 8p FONT_LABEL 9p MAP_TICK_",
-     + "LENGTH -0.030i MAP_ANNOT_OFFSET 0.035i MAP_LABEL_OFFSET 0.",
-     + "0525i FONT_TITLE 12 MAP_TITLE_OFFSET 0.01i")')
+        write(11,'("gmt gmtset FONT_ANNOT 8p FONT_LABEL 9p MAP_TICK_LENGTH -0.030i MAP_ANNOT_OFFSET 0.035i MAP_LABEL_OFFSET 0.0525i FONT_TITLE 12 MAP_TITLE_OFFSET 0.01i")')
 
         do j=1,3
 
@@ -96,9 +94,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     north component                                                                                  c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           if(j==1)then
-            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""
-     +North (mm)"" -BWesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7
-     +.3," -K -P -V2 -Y6.2i -X.8i > ",a10)'
+            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""North (mm)"" -BWesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3," -K -P -V2 -Y6.2i -X.8i > ",a10)'
             fmt(24:24)=para(dx)
             fmt(47:47)=para(dy)
             fmt(94:94)=para(xminb)
@@ -109,36 +105,25 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> "
-     +        ,a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> ",a10)')ps
             end do
-            write(11,'("echo ",2f8.3," 10 0 0 ML Site: ",a4," | gmt pste
-     +xt -JX -R -N -O -K -D-.7i/.2i -P -V2 >> ",a10)')xmaxb,ymaxb,site(i
-     +),ps
+            write(11,'("echo ",2f8.3," 10 0 0 ML Site: ",a4," | gmt pstext -JX -R -N -O -K -D-.7i/.2i -P -V2 >> ",a10)')xmaxb,ymaxb,site(i),ps
             inquire(file=file(1),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178 -P -K -O -V2 >> ",a1
-     +0)')file(1),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178 -P -K -O -V2 >> ",a10)')file(1),ps
             inquire(file=file(1),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(1),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(1),ps
             inquire(file=file(4),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(4),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(4),ps
             inquire(file=file(7),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(7),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(7),ps
             inquire(file=file(10),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0
-     + -P -K -O -V2 >> ",a10)')file(10),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0 -P -K -O -V2 >> ",a10)')file(10),ps
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     east component                                                                                   c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           else if(j==2)then
-            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""
-     +East(mm)"" -BWesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3
-     +," -K -O -P -V2 -Y-1.95i -X0i >> ",a10)'
+            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""East(mm)"" -BWesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3," -K -O -P -V2 -Y-1.95i -X0i >> ",a10)'
             fmt(24:24)=para(dx)
             fmt(47:47)=para(dy)
             fmt(92:92)=para(xminb)
@@ -149,33 +134,24 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> "
-     +        ,a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> ",a10)')ps
             end do
             inquire(file=file(2),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178  -P -K -O -V2 >> ",a
-     +10)')file(2),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178  -P -K -O -V2 >> ",a10)')file(2),ps
             inquire(file=file(2),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(2),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(2),ps
             inquire(file=file(5),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(5),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(5),ps
             inquire(file=file(8),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(8),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(8),ps
             inquire(file=file(11),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0 
-     + -P -K -O -V2 >> ",a10)')file(11),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0 -P -K -O -V2 >> ",a10)')file(11),ps
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 c     up component                                                                                     c
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           else if(j==3)then
-            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""
-     +Up (mm)"" -BWeSn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3,
-     +" -K -O -P -V2 -Y-1.95i -X0i >> ",a10)'
+            fmt='("gmt psbasemap -Bxa",f7.3,"+l""Year"" -Bya",f7.3,"+l""Up (mm)"" -BWeSn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3," -K -O -P -V2 -Y-1.95i -X0i >> ",a10)'
             fmt(24:24)=para(dx)
             fmt(47:47)=para(dy)
             fmt(91:91)=para(xminb)
@@ -186,25 +162,18 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> "
-     +        ,a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.2/50 -O -P -V2 -K >> ",a10)')ps
             end do
             inquire(file=file(3),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178 -P -K -O -V2 >> ",a1
-     +0)')file(3),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -Ey.05i/0.2,178/178/178 -P -K -O -V2 >> ",a10)')file(3),ps
             inquire(file=file(3),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(3),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,255/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(3),ps
             inquire(file=file(6),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(6),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/255 -G250/250/250 -P -K -O -V2 >> ",a10)')file(6),ps
             inquire(file=file(9),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,
-     +0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(9),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.2,0/0/0 -G250/250/250 -P -K -O -V2 >> ",a10)')file(9),ps
             inquire(file=file(12),exist=alive)
-            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0 
-     + -P -K -O -V2 >> ",a10)')file(12),ps
+            if(alive) write(11,'("gmt psxy ",a15," -JX -R -W0.2,0/180/0 -P -K -O -V2 >> ",a10)')file(12),ps
           end if
         end do
         write(11,'("gmt psxy -R -J -O -T >> ",a10)')ps

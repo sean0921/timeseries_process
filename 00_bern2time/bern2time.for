@@ -20,8 +20,7 @@ c
       print*,'                                        Update 2008.05.28'
       print*,''
       print*,''
-      print*,'Please choose: 1. Calculate velocities relative to one sta
-     +tion (Fixed Station)'
+      print*,'Please choose: 1. Calculate velocities relative to one station (Fixed Station)'
       print*,'               2. Calculate station coordinate variations'
       print*,'(1 or 2) '
       read(*,'(i1)') ch
@@ -48,18 +47,15 @@ c
       if(alive) call system('del fil.dat')
       inquire(file='error.msg',exist=alive)
       if(alive) call system('del error.msg')
-      call system('del ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_
-     +????_u_b.dat')
+      call system('del ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else
       inquire(file='fil.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
       inquire(file='error.msg',exist=alive)
       if(alive) call system('rm -f error.msg')
-      call system('rm -f ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat t
-     +s_????_u_b.dat')
-      call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.da
-     +t')
+      call system('rm -f ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
+      call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.dat')
 #endif
 
       open(15,file='fil.dat',status='old')
@@ -104,15 +100,12 @@ c
             read(line,'(59x,f9.4,18x,f6.4)')height,herr
             sigh=herr*1000*5
           else if(line(24:31)=='LATITUDE') then
-            read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f6.4)')lat,latm,lats,
-     +laterr
+            read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f6.4)')lat,latm,lats,laterr
             sign=laterr*1000*10
           else if(line(24:32)=='LONGITUDE') then
-            read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f6.4)')lon,lonm,lons,
-     +lonerr
+            read(line,'(54x,i3,1x,i2,1x,f9.6,16x,f6.4)')lon,lonm,lons,lonerr
             sige=lonerr*1000*10
-            write(12,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)')sta1,lon,lonm,
-     +lons,lat,latm,lats,height,sige,sign,sigh
+            write(12,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)')sta1,lon,lonm,lons,lat,latm,lats,height,sige,sign,sigh
           end if
         end do
 
@@ -162,15 +155,13 @@ c***********************************************************************
         t=yr//' '//dy
         stat=0
         do while (stat==0)
-          read(11,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)',iostat=stat)sta1,
-     +lon,lonm,lons,lat,latm,lats,hgh,ee,en,eh
+          read(11,'(a4,2(i4,i3,f10.6),f10.4,3f10.2)',iostat=stat)sta1,lon,lonm,lons,lat,latm,lats,hgh,ee,en,eh
           if(stat/=0) exit
           do j=1,sn
             if(sta1(1:4)==sta(j)(1:4)) then
               out(1:8)=sta(j)//'.out'
               open (12,file=out,position='append')
-              write(12,'(a8,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)')t,tt,lon,
-     +lonm,lons,lat,latm,lats,hgh,ee,en,eh
+              write(12,'(a8,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)')t,tt,lon,lonm,lons,lat,latm,lats,hgh,ee,en,eh
               close(12)
             end if
           end do
@@ -194,8 +185,7 @@ c***********************************************************************
       character out1*15,out2*15,out3*15,out4*13
       real*8 lons,lats,avgn,avge,avgh,londt,latdt,pi,adn,ade,adh
       real*8 fve,fvn,fvh
-      double precision,allocatable::rlon(:),rlat(:),hgh(:),sn(:),se(:),
-     +sh(:),t(:),time(:),dn(:),de(:),dh(:)
+      double precision,allocatable::rlon(:),rlat(:),hgh(:),sn(:),se(:),sh(:),t(:),time(:),dn(:),de(:),dh(:)
       common/fix/fve,fvn,fvh
       data latdt /111.325/
       pi=atan(1.)*4
@@ -215,8 +205,7 @@ c***********************************************************************
         open(15,file=out3)
         open(16,file=out4)
 
-        write(16,'(a)')'year doy      hr       dn      sn      de      s
-     +e      dh      sh (unit: mm)'
+        write(16,'(a)')'year doy      hr       dn      sn      de      se      dh      sh (unit: mm)'
 
         n=0
         avgn=0.
@@ -249,12 +238,9 @@ c***********************************************************************
           cycle
         end if
         rewind(12)
-        allocate(yr(n),dy(n),t(n),time(n),hgh(n),se(n),sn(n),sh(n),
-     +rlon(n),rlat(n),dn(n),de(n),dh(n))
+        allocate(yr(n),dy(n),t(n),time(n),hgh(n),se(n),sn(n),sh(n),rlon(n),rlat(n),dn(n),de(n),dh(n))
         do k=1,n
-          read(12,'(2i4,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)',iostat=stat)y
-     +r(k),dy(k),t(k),lon,lonm,lons,lat,latm,lats,hgh(k),se(k),sn(k)
-     +,sh(k)
+          read(12,'(2i4,f8.4,2(i4,i3,f10.6),f10.4,3f10.2)',iostat=stat)yr(k),dy(k),t(k),lon,lonm,lons,lat,latm,lats,hgh(k),se(k),sn(k),sh(k)
           if(stat/=0) exit
           rlon(k)=lon+lonm/60.+lons/3600.
           rlat(k)=lat+latm/60.+lats/3600.
@@ -293,8 +279,7 @@ c***********************************************************************
           write(13,'(f10.5,1x,2f8.2)') time(k),dn(k)-adn,sn(k)
           write(14,'(f10.5,1x,2f8.2)') time(k),de(k)-ade,se(k)
           write(15,'(f10.5,1x,2f8.2)') time(k),dh(k)-adh,sh(k)
-          write(16,'(2i4,f8.4,1x,6f8.2)') yr(k),dy(k),t(k),dn(k)-adn,
-     +sn(k),de(k)-ade,se(k),dh(k)-adh,sh(k)
+          write(16,'(2i4,f8.4,1x,6f8.2)') yr(k),dy(k),t(k),dn(k)-adn,sn(k),de(k)-ade,se(k),dh(k)-adh,sh(k)
         end do
         close(12,status='delete')
         close(13)

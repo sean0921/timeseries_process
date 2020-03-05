@@ -134,7 +134,7 @@ c
       end do
       close(1)
 
-#ifdef RAW
+#ifndef RAW
       call filter(ns)
 #endif
       call fit(ns)
@@ -142,7 +142,7 @@ c
       stop
       end
 
-#ifdef RAW
+#ifndef RAW
 c.......................................................................
       subroutine filter(ns)
 

@@ -13,8 +13,8 @@ AC_PREFIX_PROGRAM(["$PWD"/build])
 AC_LANG(Fortran)
 AC_PROG_FC(gfortran)
 AC_PROG_F77(gfortran)
-FCFLAGS=" -std=legacy -g -cpp"
-FFLAGS="  -std=legacy -g -cpp"
+FCFLAGS=" -std=legacy -g -cpp -ffixed-line-length-none"
+FFLAGS="  -std=legacy -g -cpp -ffixed-line-length-none"
 AC_CANONICAL_HOST
 AM_PROG_AS
 AC_PROG_INSTALL

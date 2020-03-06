@@ -1,0 +1,18 @@
+template: |
+  ## 修正
+  
+  ## 下載
+  
+  * 本專案使用最自由的 [7zip](https://www.7-zip.org) 壓縮工具打包相關程式，建議使用此工具來解壓縮取出執行檔。
+  
+  ### Windows 壓縮包
+  
+  [點此下載](https://github.com/sean0921/timeseries_process/releases/download/ <version> /timeseries_process-i686-w64-mingw32.static- <version> .7z)
+  
+  ### SHA256 Checksum (檔案驗證)
+  
+  ```
+  <checksums>  timeseries_process-i686-w64-mingw32.static- <version> .7z
+  ```
+  
+  Windows 10 可直接打開 PowerShell 輸入 `GetFileHash <檔名>` 來驗證，Windows 7 使用者請至[微軟官網](https://docs.microsoft.com/zh-tw/powershell/scripting/install/installing-windows-powershell?view=powershell-6#upgrading-existing-windows-powershell)下載較新版本 PowerShell。

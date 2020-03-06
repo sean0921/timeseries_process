@@ -105,7 +105,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.5/50 -O -P -V2 -K >> ",a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.5,50 -O -P -V2 -K >> ",a10)')ps
             end do
             write(11,'("echo ",2f8.3," 10 0 0 ML Site: ",a4," | gmt pstext -JX -R -N -O -K -D-.7i/.2i -P -V2 >> ",a10)')xmaxb,ymaxb,site(i),ps
             inquire(file=file(1),exist=alive)
@@ -134,7 +134,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.5/50 -O -P -V2 -K >> ",a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.5,50 -O -P -V2 -K >> ",a10)')ps
             end do
             inquire(file=file(2),exist=alive)
             if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.5,255/0/0 -G250/250/250 -Ey.05i/0.5,178/178/178  -P -K -O -V2 >> ",a10)')file(2),ps
@@ -162,7 +162,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             do k=1,neq
               write(11,'("echo "f9.4,f10.3," >  sym")')teq(k),yminb
               write(11,'("echo "f9.4,f10.3," >> sym")')teq(k),ymaxb
-              write(11,'("gmt psxy sym -JX -R -W0.5/50 -O -P -V2 -K >> ",a10)')ps
+              write(11,'("gmt psxy sym -JX -R -W0.5,50 -O -P -V2 -K >> ",a10)')ps
             end do
             inquire(file=file(3),exist=alive)
             if(alive) write(11,'("gmt psxy ",a15," -JX -R -Sc.02i -W0.5,255/0/0 -G250/250/250 -Ey.05i/0.5,178/178/178 -P -K -O -V2 >> ",a10)')file(3),ps

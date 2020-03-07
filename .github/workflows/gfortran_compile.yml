@@ -25,5 +25,5 @@ jobs:
     - name: Fortran Compiling Test
       run: |
         ./autogen.sh
-        ./configure ${{configure-parameters }}
+        ./configure ${{ matrix.configure-parameters }}
         make install clean

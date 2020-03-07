@@ -1,7 +1,6 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# This workflow will install Fortran and GNU Autotools dependencies, and do compile test
 
-name: Fortran Program Simple Compiling Test
+name: Fortran Program with GNU Autotools Simple Compiling Test
 
 on:
   push:
@@ -19,11 +18,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
-        cat /etc/apt/sources.list && cat /etc/apt/sources.list.d/*
+        cat /etc/apt/sources.list && cat /etc/apt/sources.list.d/* 1>&2
         sudo apt-get update
-        sudo env ACCEPT_EULA=Y apt-get upgrade -y
+        sudo env ACCEPT_EULA=Y apt-get upgrade -y  # for freaking preinstalled M$ packages
         sudo apt-get install autotools-dev gfortran gfortran-mingw-w64-i686 inkscape-open-symbols
-    - name: Fortran Compiling Test
+    - name: Fortran Compiling Test with GNU Autotools
       run: |
         ./autogen.sh
         ./configure ${{ matrix.configure-parameters }}

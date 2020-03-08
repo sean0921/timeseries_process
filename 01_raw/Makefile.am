@@ -25,18 +25,20 @@ $(RCFILES): %.rc:
 	cat ../common/version.rc >> $@
 
 comfilt.rc.o: %.rc.o: %.rc
-	convert -density 384 ../icons/lines-and-angles_filter.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
 raw.rc.o: %.rc.o: %.rc
-	convert -density 384 ../icons/lines-and-angles_adjust.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
 comfilt_trend.rc.o: %.rc.o: %.rc
-	convert -density 384 ../icons/lines-and-angles_chart.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
+ico: %.rc
+	convert -density 384 ../icons/lines-and-angles_filter.svg -define icon:auto-resize $$(basename $< .rc).ico
+	convert -density 384 ../icons/lines-and-angles_adjust.svg -define icon:auto-resize $$(basename $< .rc).ico
+	convert -density 384 ../icons/lines-and-angles_chart.svg -define icon:auto-resize $$(basename $< .rc).ico
+
 clean-local:
-	rm -f *.ico *.rc
+	rm -f *.rc
 
 endif

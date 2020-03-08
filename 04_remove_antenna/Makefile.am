@@ -16,10 +16,12 @@ $(RCFILES): %.rc:
 	cat ../common/version.rc >> $@
 
 $(RCOBJECT): %.rc.o: %.rc
-	convert -density 384 ../icons/science-and-fiction_listen.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
+ico: %.rc
+	convert -density 384 ../icons/science-and-fiction_listen.svg -define icon:auto-resize $$(basename $< .rc).ico
+
 clean-local:
-	rm -f *.ico *.rc
+	rm -f *.rc
 
 endif

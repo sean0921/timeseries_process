@@ -18,14 +18,16 @@ $(RCFILES): %.rc:
 	cat ../common/version.rc >> $@
 
 bern2time.rc.o: %.rc.o: %.rc
-	convert -density 384 ../icons/lines-and-angles_report.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
 getpl.rc.o: %.rc.o: %.rc
-	convert -density 384 ../icons/lines-and-angles_locate.svg -define icon:auto-resize $$(basename $< .rc).ico
 	$(WINDRES) $< -O coff -o $@
 
+ico:
+	convert -density 384 ../icons/lines-and-angles_report.svg -define icon:auto-resize $$(basename $< .rc).ico
+	convert -density 384 ../icons/lines-and-angles_locate.svg -define icon:auto-resize $$(basename $< .rc).ico
+
 clean-local:
-	rm -f *.ico *.rc
+	rm -f *.rc
 
 endif

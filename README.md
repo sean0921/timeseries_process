@@ -1,6 +1,6 @@
 # 時間序列處理工具
 
-![](https://travis-ci.org/holishing/timeseries_process.svg?branch=master)
+![](https://travis-ci.org/sean0921/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/gwfKEH5.png)
 
 ## 使用 GNU Fortran 與 GNU Autotools 編譯
@@ -32,7 +32,7 @@
 
 # Time Series Processing Tools
 
-![](https://travis-ci.org/holishing/timeseries_process.svg?branch=master)
+![](https://travis-ci.org/sean0921/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/gwfKEH5.png)
 
 ## Compiling by GNU Fortran and GNU Autotools

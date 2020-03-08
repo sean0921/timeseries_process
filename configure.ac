@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([timeseries_process], [2019.1005.0], [https://github.com/sean0921/timeseries_process])
+AC_INIT([timeseries_process], [2020.308.0], [https://github.com/sean0921/timeseries_process])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 #AC_CONFIG_SRCDIR([])
 #AC_CONFIG_HEADERS([config.h])
@@ -53,13 +53,7 @@ esac
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([00_bern2time/Makefile
-                 01_raw/Makefile
-                 02_remove_trend/Makefile
-                 03_remove_period/Makefile
-                 04_remove_antenna/Makefile
-                 05_Fit_velocity/Makefile
-                 util/Makefile
+AC_CONFIG_FILES([src/Makefile
                  common/version.rc
                  Makefile])
 AC_OUTPUT

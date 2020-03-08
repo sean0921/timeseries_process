@@ -6,12 +6,13 @@ git:
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get upgrade -y -qq
-    - sudo apt-get install -qq autotools-dev gfortran gfortran-mingw-w64-i686 inkscape-open-symbols
+    - sudo apt-get install -qq autotools-dev gfortran gfortran-mingw-w64-i686 gfortran-mingw-w64-x86-64
 
 matrix:
     include:
         - env: CONFIGURE=""
         - env: CONFIGURE="--host=i686-w64-mingw32"
+        - env: CONFIGURE="--host=x86_64-w64-mingw32"
 
 script:
     - ./autogen.sh

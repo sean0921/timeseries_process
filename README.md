@@ -35,23 +35,10 @@
 ![](https://travis-ci.org/sean0921/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/gwfKEH5.png)
 
-## Compiling by GNU Fortran and GNU Autotools
+## Compiling by GNU Fortran and Meson Build Systerm
 
-* Install GNU Autotools(`autotools-dev`, `aclocal`, `automake`, `autoconf`), GNU/BSD make(`make`) and GNU Fortran(`gfortran`)  for your platform (Linux/Windows MSYS2)  first.
-
-* Linux / Other Unix-like platform:
-    - Type `./autogen.sh && ./configure && make && make install` in main folder, it should be compiled (with debug symbol by default), and you can find the excutable on `build/` folder.
-
-* Win32 platform
-    - cross compiling by `mingw-w64` toolchain on Unix-like Platform (Linux, FreeBSD...etc) (**Faster**)
-      + type cross-compile configure options like `./configure --host i686-w64-mingw32.static && make && make install` in main folder, it should be compiled (with debug symbol by default), and you can find the excutable on `build/` folder.
-    - compiling in Windows 7/10
-      + Type `./autogen.sh && ./configure && make && make install` in main folder, it should be compiled (with debug symbol by default), and you can find the excutable on `build/` folder.
-
-## Make a binary package (for easier to create tarballs)
-
-* `make 7zpkg` (static binaries)
-    - Please install `p7zip` package first.
+* Install Meson Build System, Ninja Build, GNU Fortran  for your platform (Linux/Windows MSYS2)  first.
+* `meson builddir; cd builddir; ninja`
 
 ## Reference for order
 

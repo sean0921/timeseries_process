@@ -1,9 +1,9 @@
 ## for projects
-build/
-builddir/
-crossbuild_config
-!crossbuild_config/mingw_cross_win32.txt
-!crossbuild_config/mingw_cross_win64.txt
+/build
+/builddir
+/crossbuild_config/*
+!/crossbuild_config/mingw_cross_win32.txt
+!/crossbuild_config/mingw_cross_win64.txt
 
 ## for system
 *.7z

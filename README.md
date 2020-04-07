@@ -1,5 +1,7 @@
 # 時間序列處理工具
 
+![點我到程式下載頁面](https://github.com/sean0921/timeseries_process/releases)
+
 ![](https://travis-ci.org/sean0921/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/gwfKEH5.png)
 

@@ -42,7 +42,7 @@ c
         stop
       end if
 
-#ifdef PLATFORM_IS_NT
+#ifdef PLATFORM_IS_WINDOWS
       inquire(file='fil.dat',exist=alive)
       if(alive) call system('del fil.dat')
       inquire(file='error.msg',exist=alive)
@@ -224,7 +224,7 @@ c***********************************************************************
           close(14)
           close(15)
           close(16)
-#ifdef PLATFORM_IS_NT
+#ifdef PLATFORM_IS_WINDOWS
           temp='del '//out1//' '//out2//' '//out3//' '//out4//' '//inp
           call system(temp)
 #else

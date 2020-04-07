@@ -13,7 +13,7 @@ c
       logical alive
 
       inquire(file='fil.dat',exist=alive)
-#ifdef PLATFORM_IS_NT
+#ifdef PLATFORM_IS_WINDOWS
       if(alive) call system('del fil.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else

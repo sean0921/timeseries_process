@@ -145,7 +145,7 @@ c.......................................................................
 
       print*,'Start filter....'
 
-#ifdef PLATFORM_IS_NT
+#ifdef PLATFORM_IS_WINDOWS
       inquire(file='warning-e.sum',exist=alive)
       if(alive) call system('del warning-e.sum')
       inquire(file='warning-n.sum',exist=alive)

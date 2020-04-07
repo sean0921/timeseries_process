@@ -12,7 +12,7 @@ jobs:
         content: ["","--cross-file mingw_cross_win32.txt","--cross-file mingw_cross_win64.txt"]
     steps:
     - uses: actions/checkout@v2
-    - name: test again
+    - name: core steps for building fortran programs
       uses: holishing/gfortran_meson_action@2020.405.1
       with:
         matrix:

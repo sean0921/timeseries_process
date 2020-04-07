@@ -16,12 +16,12 @@
 ## 使用方式
 
 * 執行順序
-  1. `bern2time.exe`
-  2. `raw.exe`
+  1. `bern2time.exe` (Transform Bersese 5.x `FN*.OUT` file to E/N/U format plain text)
+  2. `raw.exe`/`comfilt.exe`
   3. `remove_trend.exe`
   4. `remove_period.exe`
   5. `remove_antenna.exe`
-  6. `Fit_velocity.exe`
+  6. `fit.exe` (Fit Velocity)
 
 * 其他待補充
 

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        content: ["","--cross-file mingw_cross_win32.txt","--cross-file mingw_cross_win64.txt"]
+        content: ["","--cross-file crossbuild_config/mingw_cross_win32.txt","--cross-file crossbuild_config/mingw_cross_win64.txt"]
     steps:
     - uses: actions/checkout@v2
     - name: core steps for building fortran programs

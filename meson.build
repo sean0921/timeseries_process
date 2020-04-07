@@ -32,13 +32,41 @@ add_global_arguments('-DPLATFORM_IS_WINDOWS',language:'fortran')
 add_global_link_arguments('-static',language:'fortran')
 endif
 
-executable('bern2time','src/bern2time.for','src/bubblesort.for',install : true)
-executable('getpl','src/getpl.for','src/bubblesort.for',install : true)
-executable('comfilt','src/comfilt.for','src/bubblesort.for','src/int2char.for','src/lsqr.for',install : true)
-executable('raw','src/comfilt.for','src/bubblesort.for','src/int2char.for','src/lsqr.for',fortran_args : '-DRAW',install : true)
-executable('comfilt_trend','src/comfilt_trend.for','src/bubblesort.for','src/int2char.for','src/lsqr.for',install : true)
-executable('remove_trend','src/remove_trend.for',install : true)
-executable('remove_period','src/remove_period.for',install : true)
-executable('remove_antenna','src/remove_antenna.for',install : true)
-executable('fit','src/fit.for','src/int2char.for','src/lsqr.for',install : true)
-executable('plot_ts','src/plot_ts.for',install : true)
+bern2time_src       = ['src/bern2time.for','src/bubblesort.for']
+getpl_src           = ['src/getpl.for','src/bubblesort.for']
+comfilt_src         = ['src/comfilt.for','src/bubblesort.for','src/int2char.for','src/lsqr.for']
+raw_src             = ['src/comfilt.for','src/bubblesort.for','src/int2char.for','src/lsqr.for']
+comfilt_trend_src   = ['src/comfilt_trend.for','src/bubblesort.for','src/int2char.for','src/lsqr.for']
+remove_trend_src    = ['src/remove_trend.for']
+remove_period_src   = ['src/remove_period.for']
+remove_antenna_src  = ['src/remove_antenna.for']
+fit_src             = ['src/fit.for','src/int2char.for','src/lsqr.for']
+plot_ts_src         = ['src/plot_ts.for']
+
+#### TODO: Add WINDRES module commands ####
+
+#if platform_windows
+#bern2time_src       = ['']
+#getpl_src           = ['']
+#comfilt_src         = ['']
+#raw_src             = ['']
+#comfilt_trend_src   = ['']
+#remove_trend_src    = ['']
+#remove_period_src   = ['']
+#remove_antenna_src  = ['']
+#fit_src             = ['']
+#plot_ts_src         = ['']
+#endif
+
+############################################
+
+executable('bern2time'      , bern2time_src     )
+executable('getpl'          , getpl_src         )
+executable('comfilt'        , comfilt_src       )
+executable('raw'            , raw_src           , fortran_args : '-DRAW')
+executable('comfilt_trend'  , comfilt_trend_src )
+executable('remove_trend'   , remove_trend_src  )
+executable('remove_period'  , remove_period_src )
+executable('remove_antenna' , remove_antenna_src)
+executable('fit'            , fit_src           )
+executable('plot_ts'        , plot_ts_src       )

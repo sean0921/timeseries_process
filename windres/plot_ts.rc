@@ -1,0 +1,2 @@
+#include "version.rc"
+id ICON "plot_ts.ico"

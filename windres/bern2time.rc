@@ -1,0 +1,2 @@
+#include "version.rc"
+id ICON "bern2time.ico"

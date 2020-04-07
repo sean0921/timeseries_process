@@ -1,0 +1,2 @@
+#include "version.rc"
+id ICON "remove_trend.ico"

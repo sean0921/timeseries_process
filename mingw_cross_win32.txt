@@ -12,7 +12,7 @@ cmake = 'i686-w64-mingw32-cmake'
 [properties]
 root = 'i686-w64-mingw32'
 sys_root = '/usr/i686-w64-mingw32'
-fortran_args = []
+fortran_args = ['-DMINGW']
 fortran_link_args = ['-static']
 needs_exe_wrapper = true
 

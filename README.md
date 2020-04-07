@@ -7,8 +7,11 @@
 * Windows 平臺：
 
     - 在 Windows 7/10 底下安裝 [MSYS2 環境](https://www.msys2.org/) ([教學](https://magiclen.org/msys2/)) 編譯
-    - 安裝 Meson Build System(`meson`), Ninja Build(`ninja`), 和 GNU Fortran(`gfortran`): `pacman -S meson ninja gfortran`
-    - 在程式碼最上層目錄輸入 `meson builddir; cd builddir; ninja`，就會開始編譯了，你會在 `builddir/` 資料夾底下發現編譯好的 `*.exe` 程式
+    - 使用 `pacman` 指令來安裝 Meson Build System(`meson`), Ninja Build(`ninja`), 和 GNU Fortran(`gfortran`) ：
+        + `pacman -S meson ninja gfortran`
+    - 在程式碼最上層目錄輸入：
+        + `meson builddir; cd builddir; ninja`
+    - 之後系統就會開始編譯程式了，結束後你會在 `builddir/` 資料夾底下發現已經編譯好的 `*.exe` 程式，再把那些程式複製到你要的地方
 
 ## 使用方式
 

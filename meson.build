@@ -1,8 +1,9 @@
 project('timeseries_process','fortran')
 add_global_arguments('-cpp',language:'fortran')
 add_global_arguments('-ffixed-line-length-none',language:'fortran')
-if 'windows' == host_machine.system()
+if host_machine.system() == 'windows'
 add_global_arguments('-DPLATFORM_IS_WINDOWS',language:'fortran')
+add_global_link_arguments('-static',language:'fortran')
 endif
 
 executable('bern2time','src/bern2time.for','src/bubblesort.for',install : true)

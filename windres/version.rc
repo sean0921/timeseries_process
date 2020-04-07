@@ -1,8 +1,8 @@
-#define VERSION_STR    "2020.407.1.900"
+#define VERSION_STR    "2020.407.1.901"
 #define MAJOR_VERSION  2020
 #define MINOR_VERSION  407
 #define MICRO_VERSION  1
-#define NANO_VERSION   900
+#define NANO_VERSION   901
 
 1 VERSIONINFO
 FILEVERSION     MAJOR_VERSION,MINOR_VERSION,MICRO_VERSION,NANO_VERSION
@@ -15,7 +15,7 @@ BEGIN
       VALUE "CompanyName", "Department of Earth Sciences, NCKU"
       VALUE "FileDescription", "Severnal Tools about Time Series Process (compiled by GNU Fortran and built by GNU AutoTools)"
       VALUE "FileVersion", VERSION_STR
-      VALUE "LegalCopyright", "Seismology Lab"
+      VALUE "LegalCopyright", "Seismology Lab, Department of Earth Sciences, NCKU"
       VALUE "ProductName", "Time Series Process Toolchain"
       VALUE "ProductVersion", VERSION_STR
     END

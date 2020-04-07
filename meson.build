@@ -1,6 +1,7 @@
 project('timeseries_process',
         'fortran',
-         default_options:['buildtype=debugoptimized']
+        version: '2020.407.1.901',
+        default_options:['buildtype=debugoptimized']
 )
 add_global_arguments('-cpp',language:'fortran')
 add_global_arguments('-ffixed-line-length-none',language:'fortran')

@@ -1,7 +1,33 @@
 project('timeseries_process','fortran')
 add_global_arguments('-cpp',language:'fortran')
 add_global_arguments('-ffixed-line-length-none',language:'fortran')
-if host_machine.system() == 'windows'
+
+################################################################################
+# host system detection
+
+host_os = host_machine.system().to_lower()
+message('Host os: ' + host_os)
+
+platform_linux = (
+  host_os.contains('linux')
+)
+
+platform_windows = (
+  host_os.contains('mingw') or
+  host_os.contains('cygwin') or
+  host_os.contains('windows')
+)
+
+platform_osx = (
+  host_os.contains('machten') or
+  host_os.contains('rhapsody') or
+  host_os.contains('darwin')
+)
+
+#
+################################################################################
+
+if platform_windows
 add_global_arguments('-DPLATFORM_IS_WINDOWS',language:'fortran')
 add_global_link_arguments('-static',language:'fortran')
 endif

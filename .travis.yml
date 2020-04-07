@@ -11,9 +11,11 @@ before_install:
 matrix:
     include:
         - env: CONFIGURE=""
+        - env: CONFIGURE="--cross-file mingw_cross_win32.txt"
+        - env: CONFIGURE="--cross-file mingw_cross_win64.txt"
 
 script:
-    - meson build
+    - meson build $CONFIGURE
     - cd build
     - ninja
     - DESTDIR=/opt ninja install

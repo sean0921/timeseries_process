@@ -29,7 +29,7 @@
 
       do i=1,n
         print*,'Processing in station: ',site(i)
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
         maping='map'//site(i)(1:4)//'.bat'
 #else
         maping='map'//site(i)(1:4)//'.sh'
@@ -50,7 +50,7 @@
         file(12)='ts_'//site(i)//'_u_t.dat'
 
         open(11,file=maping)
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
         write(11,'("@echo off")')
 #else
         write(11,'("#!/bin/sh")')
@@ -178,13 +178,13 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         end do
         write(11,'("gmt psxy -R -J -O -T >> ",a10)')ps
         write(11,'("gmt psconvert -Tg -A ",a10)')ps
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
         write(11,'("del sym gmt.history gmt.conf")')
 #else
         write(11,'("rm -f sym gmt.history gmt.conf")')
 #endif
         close(11)
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
         call system(maping)
 #else
         call system('sh '//maping)

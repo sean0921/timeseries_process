@@ -145,7 +145,7 @@ c.......................................................................
 
       print*,'Start filter....'
 
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
       inquire(file='warning-e.sum',exist=alive)
       if(alive) call system('del warning-e.sum')
       inquire(file='warning-n.sum',exist=alive)

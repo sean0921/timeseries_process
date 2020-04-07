@@ -13,7 +13,7 @@ c
       logical alive
 
       inquire(file='fil.dat',exist=alive)
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
       if(alive) call system('del fil.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else

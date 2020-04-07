@@ -156,7 +156,7 @@ c.......................................................................
 
       print*,'Start filter....'
 
-#ifdef MINGW
+#ifdef PLATFORM_IS_NT
       inquire(file='warning-e.sum',exist=alive)
       if(alive) call system('del warning-e.sum')
       inquire(file='warning-n.sum',exist=alive)
@@ -179,7 +179,7 @@ c.......................................................................
       inquire(file='tmp.dat',exist=alive)
       if(alive) call system('rm -f fil.dat')
 #endif
-c^^^^^ ifdef MINGW
+c^^^^^ ifdef PLATFORM_IS_NT
 
       do c=1,3
 #ifdef RAW

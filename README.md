@@ -8,17 +8,17 @@
 
     - 在 Windows 7/10 底下安裝 [MSYS2 環境](https://www.msys2.org/) ([教學](https://magiclen.org/msys2/)) 編譯
     - 安裝 Meson Build System(`meson`), Ninja Build(`ninja`), 和 GNU Fortran(`gfortran`): `pacman -S meson ninja gfortran`
-    - 在程式碼最上層目錄輸入 `meson builddir; cd builddir; ninja`，就會開始編譯了，你會在 `builddir/` 資料夾底下發現編號的程式，但 DLL 檔請自己抓或把 `C:\msys64\mingw32\bin` 加到你的 Windows 環境變數
+    - 在程式碼最上層目錄輸入 `meson builddir; cd builddir; ninja`，就會開始編譯了，你會在 `builddir/` 資料夾底下發現編譯好的 `*.exe` 程式
 
 ## 使用方式
 
 * 執行順序
-  1. `bern2time`
-  2. `raw`
-  3. `remove_trend`
-  4. `remove_period`
-  5. `remove_antenna`
-  6. `Fit_velocity`
+  1. `bern2time.exe`
+  2. `raw.exe`
+  3. `remove_trend.exe`
+  4. `remove_period.exe`
+  5. `remove_antenna.exe`
+  6. `Fit_velocity.exe`
 
 * 其他待補充
 
@@ -40,12 +40,12 @@
 
 ## Reference for order
 
-0. bern2time
-1. raw
-2. remove_trend
-3. remove_period
-4. remove_antenna
-5. Fit_velocity
+0. `bern2time.exe`
+1. `raw.exe`
+2. `remove_trend`
+3. `remove_period`
+4. `remove_antenna`
+5. `Fit_velocity`
 
 ## Input file
 

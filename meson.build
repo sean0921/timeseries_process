@@ -1,4 +1,7 @@
-project('timeseries_process','fortran')
+project('timeseries_process',
+        'fortran',
+         default_options:['buildtype=debugoptimized']
+)
 add_global_arguments('-cpp',language:'fortran')
 add_global_arguments('-ffixed-line-length-none',language:'fortran')
 
@@ -8,20 +11,10 @@ add_global_arguments('-ffixed-line-length-none',language:'fortran')
 host_os = host_machine.system().to_lower()
 message('Host os: ' + host_os)
 
-platform_linux = (
-  host_os.contains('linux')
-)
-
 platform_windows = (
   host_os.contains('mingw') or
   host_os.contains('cygwin') or
   host_os.contains('windows')
-)
-
-platform_osx = (
-  host_os.contains('machten') or
-  host_os.contains('rhapsody') or
-  host_os.contains('darwin')
 )
 
 #
@@ -43,22 +36,22 @@ remove_antenna_src  = ['src/remove_antenna.for']
 fit_src             = ['src/fit.for','src/int2char.for','src/lsqr.for']
 plot_ts_src         = ['src/plot_ts.for']
 
-#### TODO: Add WINDRES module commands ####
+####### Add WINDRES module commands #######
 
 if platform_windows
 
-windres_args = '-O coff'
 rcinfo_windows = import('windows')
-bern2time_rcinfo        = rcinfo_windows.compile_resources('windres/bern2time.rc')
-getpl_rcinfo            = rcinfo_windows.compile_resources('windres/getpl.rc')
-comfilt_rcinfo          = rcinfo_windows.compile_resources('windres/comfilt.rc')
-raw_rcinfo              = rcinfo_windows.compile_resources('windres/raw.rc')
-comfilt_trend_rcinfo    = rcinfo_windows.compile_resources('windres/comfilt_trend.rc')
-remove_trend_rcinfo     = rcinfo_windows.compile_resources('windres/remove_trend.rc')
-remove_period_rcinfo    = rcinfo_windows.compile_resources('windres/remove_period.rc')
+
+bern2time_rcinfo        = rcinfo_windows.compile_resources('windres/bern2time.rc'     )
+getpl_rcinfo            = rcinfo_windows.compile_resources('windres/getpl.rc'         )
+comfilt_rcinfo          = rcinfo_windows.compile_resources('windres/comfilt.rc'       )
+raw_rcinfo              = rcinfo_windows.compile_resources('windres/raw.rc'           )
+comfilt_trend_rcinfo    = rcinfo_windows.compile_resources('windres/comfilt_trend.rc' )
+remove_trend_rcinfo     = rcinfo_windows.compile_resources('windres/remove_trend.rc'  )
+remove_period_rcinfo    = rcinfo_windows.compile_resources('windres/remove_period.rc' )
 remove_antenna_rcinfo   = rcinfo_windows.compile_resources('windres/remove_antenna.rc')
-fit_rcinfo              = rcinfo_windows.compile_resources('windres/fit.rc')
-plot_ts_rcinfo          = rcinfo_windows.compile_resources('windres/plot_ts.rc')
+fit_rcinfo              = rcinfo_windows.compile_resources('windres/fit.rc'           )
+plot_ts_rcinfo          = rcinfo_windows.compile_resources('windres/plot_ts.rc'       )
 
 bern2time_src        += bern2time_rcinfo
 getpl_src            += getpl_rcinfo
@@ -73,7 +66,7 @@ plot_ts_src          += plot_ts_rcinfo
 
 endif
 
-############################################
+###########################################
 
 executable('bern2time'      , bern2time_src     )
 executable('getpl'          , getpl_src         )

@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eux
 
 ## POSIX shell script for genenrate files for resources compilers (e.g. windres)
 

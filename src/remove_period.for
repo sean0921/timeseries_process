@@ -1,4 +1,4 @@
-      program remove
+      program remove_period
 
       implicit none
       character infile*15,outfile*15,line*500,sta*4,stap*4
@@ -7,6 +7,13 @@
       real*8 cal,t,d,s,pi
       double precision,allocatable::m(:),teq(:),g(:)
       integer i,j,s1,s2,m1,H,ns,stat,neq,tyeq,tm,ty,nT
+
+      print*,'                         PROGRAM REMOVE_PERIOD                         '
+      print*,'                                            by Kuo-En Ching 2005.01.11 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
 
       pi=atan(1.)*4
 

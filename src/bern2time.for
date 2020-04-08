@@ -15,10 +15,12 @@ c
       logical alive
       common/fix/fve,fvn,fvh
 
-      print*,'             PROGRAM BERN2TIME version: 5.0'
-      print*,'                               by Kuo-En Ching 2005.01.11'
-      print*,'                                        Update 2008.05.28'
+      print*,'                         PROGRAM BERN2TIME                             '
+      print*,'                                            by Kuo-En Ching 2005.01.11 '
+      print*,'                                                     Update 2008.05.28 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
       print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
       print*,''
       print*,'Please choose: 1. Calculate velocities relative to one station (Fixed Station)'
       print*,'               2. Calculate station coordinate variations'

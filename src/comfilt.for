@@ -14,6 +14,14 @@ c
       double precision,allocatable::m(:),sg(:),teq(:)
       integer i,j,s1,s2,m1,n,ns,stat,neq,H,tyeq,tm
 
+      print*,'                         PROGRAM COMFILT/RAW                           '
+      print*,'                                            by Kuo-En Ching 2005.01.11 '
+      print*,'                                                     Update 2014.01.27 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
+
       pi=atan(1.)*4
 
 #ifdef RAW

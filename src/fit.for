@@ -9,6 +9,13 @@
       real*8 mis,rr,ve,vn,vh,se,sn,sh,lonn,latt,rt,c
       double precision,allocatable::t(:),g(:,:),d(:),w(:),m(:),sg(:),teq(:),ce(:),cn(:),ch(:),ces(:),cns(:),chs(:),pve(:),pvn(:),pvh(:),pves(:),pvns(:),pvhs(:),std(:),cal(:),t1(:),tf(:),dt(:),vee(:),vnn(:),vhh(:),see(:),snn(:),shh(:)
 
+      print*,'                           PROGRAM FIT                                 '
+      print*,'                                            by Kuo-En Ching 2005.01.11 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
+
       open(1,file='fit.inp',status='old')
       ns=0
       stat=0

@@ -12,6 +12,14 @@ c
       integer i,j,n,latd,lond,latm,lonm,stat,ty
       logical alive
 
+      print*,'                            PROGRAM GETPL                              '
+      print*,'                                            by Kuo-En Ching 2005.01.13 '
+      print*,'                                                     Update 2005.09.19 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
+
       inquire(file='fil.dat',exist=alive)
 #ifdef PLATFORM_IS_WINDOWS
       if(alive) call system('del fil.dat')

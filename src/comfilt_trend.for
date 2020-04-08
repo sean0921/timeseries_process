@@ -4,7 +4,7 @@ c--     Considering that the post-seismic decay is LOG-type decay
 c
 c----comfilt.for---
 c
-      program comfilt
+      program comfilt_trend
 
       implicit none
       character infile*15,outfile*15,outfil1*15,line*150,sta*4
@@ -13,6 +13,14 @@ c
       double precision,allocatable::t(:),std(:),g(:,:),d(:),w(:),cal(:)
       double precision,allocatable::m(:),sg(:),teq(:)
       integer i,j,s1,s2,m1,n,ns,stat,neq,H,tyeq,tm
+
+      print*,'                         PROGRAM COMFILT_TREND                         '
+      print*,'                                            by Kuo-En Ching 2006.05.02 '
+      print*,'                                                     Update 2006.05.07 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
 
       pi=atan(1.)*4
 

@@ -10,6 +10,13 @@
       data dxb,dyb /9.,8./
       logical alive
 
+      print*,'                            PROGRAM PLOT_TS                            '
+      print*,'                                            by Kuo-En Ching 2005.01.11 '
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,''
+      print*,'source code: https://github.com/sean0921/timeseries_process'
+      print*,''
+
       open(11,file='plot_ts.inp',status='old')
       read(11,*) pxminb,pxmaxb
       read(11,*) neq

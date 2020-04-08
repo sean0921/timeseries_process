@@ -149,6 +149,7 @@
             nn(s1)=1
             do i=2,n
               if((t(i)-t(i-1))>0.5) nn(s1)=nn(s1)+1
+ccccccc  TODO: Figure out why this line are added, and its original usage
 c              if((t(i)-t(i-1))<0.5) t(i)=t(i-1)
             end do
           end if
@@ -433,6 +434,7 @@ c            if(abs(rt-t(n))<.001) exit
 
       open(99,file='fit.fout')
       do i=1,ns
+ccccccc  TODO: Figure out why those 2 lines are added, and those original usage
 c        if(nn(i)<2) cycle
 c        if(dt(i)<2) cycle
         open(98,file='getpl.gout',status='old')

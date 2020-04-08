@@ -1,6 +1,7 @@
 # 時間序列處理工具
 
 ![點我直接下載 .exe 檔](https://github.com/sean0921/timeseries_process/releases)
+![點我直接查看 Fortran 程式](https://github.com/sean0921/timeseries_process/tree/master/src)
 
 ![](https://travis-ci.org/sean0921/timeseries_process.svg?branch=master)
 ![](https://i.imgur.com/gwfKEH5.png)

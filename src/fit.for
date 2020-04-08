@@ -433,8 +433,8 @@ c            if(abs(rt-t(n))<.001) exit
 
       open(99,file='fit.fout')
       do i=1,ns
-        if(nn(i)<2) cycle
-        if(dt(i)<2) cycle
+c        if(nn(i)<2) cycle
+c        if(dt(i)<2) cycle
         open(98,file='getpl.gout',status='old')
         statt=0
         do while (statt==0)

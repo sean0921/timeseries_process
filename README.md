@@ -12,9 +12,11 @@
 
     - 在 Windows 7/10 底下安裝 [MSYS2 環境](https://www.msys2.org/) ([教學](https://magiclen.org/msys2/)) 編譯
     - 按壓 `開始鍵+R` 組合鍵，在「執行」視窗輸入 `C:\msys64\mingw32.exe` 後按確認，開啟 **MSYS2 MinGW 32-bit** 環境
+        + *或是* 按壓 `開始鍵+R` 組合鍵，在「執行」視窗輸入 `C:\msys64\mingw64.exe` 後按確認，開啟 **MSYS2 MinGW 64-bit** 環境
         + 開始使用 MSYS2 後，建議先更新環境：`pacman -Syu`，更新後若有出現相關提示，請按照提示直接關閉視窗，再於打開後執行 `pacman -Su`
-    - 使用 `pacman` 指令來安裝 Meson Build System (`meson`)、Ninja Build (`ninja`)、編譯 32 位元 Windows 執行檔用的 GNU Fortran (`mingw-w64-i686-gcc-fortran`) 以及 Git 版本控制系統(`git`)：
-        + `pacman -S meson ninja mingw-w64-i686-gcc-fortran git`
+    - 使用 `pacman` 指令來安裝 Meson Build System (`mingw-w64-i686-meson`)、Ninja Build (`mingw-w64-i686-ninja`)、編譯 32 位元 Windows 執行檔用的 GNU Fortran (`mingw-w64-i686-gcc-fortran`) 以及 Git 版本控制系統(`git`)：
+        + `pacman -S mingw-w64-i686-meson mingw-w64-i686-ninja mingw-w64-i686-gcc-fortran git`
+        + *或是* 使用 `pacman` 指令來安裝 Meson Build System (`mingw-w64-x86_64-meson`)、Ninja Build (`mingw-w64-x86_64-ninja`)、編譯 64 位元 Windows 執行檔用的 GNU Fortran (`mingw-w64-x86_64-gcc-fortran`) 以及 Git 版本控制系統(`git`)： `pacman -S mingw-w64-x86_64-meson mingw-w64-x86_64-ninja mingw-w64-x86_64-gcc-fortran git`
     - 使用 `git` 指令抓取本專案所有程式碼與版本紀錄：
         + `git clone https://github.com/sean0921/timeseries_process.git timeseries_process`
         + `cd timeseries_process` 即可進入本專案程式碼最上層目錄

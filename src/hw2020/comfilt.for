@@ -665,7 +665,7 @@ c      sig=sse/real(sum(nw)*(n-(n1-1))) ! Be careful!  Maybe mis=sqrt(sig)
       end
 
 c.......................................................................
-      subroutine invert_matrix(ma,inv,n) ! 求反矩陣
+      subroutine invert_matrix(ma,inv,n) ! get the inverse matrix
 
       integer i,j,n
       real*8 ma(n,n),temp(n,n),inv(n,n)
@@ -678,12 +678,12 @@ c.......................................................................
         inv(i,i)=1.
       end do
 
-      call upper(temp,inv,n)  ! 做上三角矩陣處理
-      call lower(temp,inv,n)  ! 做下三角矩陣處理
+      call upper(temp,inv,n)  ! doing upper triangular matrix subroutine
+      call lower(temp,inv,n)  ! doing lower triangular matrix subroutine
 
       do i=1,n
         do j=1,n
-          inv(i,j)=inv(i,j)/temp(i,i)  ! 除上對角線元素
+          inv(i,j)=inv(i,j)/temp(i,i)  ! devieded with diagonal element
         end do
       end do
 
@@ -830,44 +830,44 @@ c-------------------------------------------------------------
       if (a==58) b='58'
       if (a==59) b='59'
       if (a==60) b='60'
-      if (a==51) b='61'
-      if (a==52) b='62'
-      if (a==53) b='63'
-      if (a==54) b='64'
-      if (a==55) b='65'
-      if (a==56) b='66'
-      if (a==57) b='67'
-      if (a==58) b='68'
-      if (a==59) b='69'
-      if (a==60) b='70'
-      if (a==51) b='71'
-      if (a==52) b='72'
-      if (a==53) b='73'
-      if (a==54) b='74'
-      if (a==55) b='75'
-      if (a==56) b='76'
-      if (a==57) b='77'
-      if (a==58) b='78'
-      if (a==59) b='79'
-      if (a==60) b='80'
-      if (a==51) b='81'
-      if (a==52) b='82'
-      if (a==53) b='83'
-      if (a==54) b='84'
-      if (a==55) b='85'
-      if (a==56) b='86'
-      if (a==57) b='87'
-      if (a==58) b='88'
-      if (a==59) b='89'
-      if (a==60) b='90'
-      if (a==51) b='91'
-      if (a==52) b='92'
-      if (a==53) b='93'
-      if (a==54) b='94'
-      if (a==55) b='95'
-      if (a==56) b='96'
-      if (a==57) b='97'
-      if (a==58) b='98'
-      if (a==59) b='99'
+      if (a==61) b='61'
+      if (a==62) b='62'
+      if (a==63) b='63'
+      if (a==64) b='64'
+      if (a==65) b='65'
+      if (a==66) b='66'
+      if (a==67) b='67'
+      if (a==68) b='68'
+      if (a==69) b='69'
+      if (a==70) b='70'
+      if (a==71) b='71'
+      if (a==72) b='72'
+      if (a==73) b='73'
+      if (a==74) b='74'
+      if (a==75) b='75'
+      if (a==76) b='76'
+      if (a==77) b='77'
+      if (a==78) b='78'
+      if (a==79) b='79'
+      if (a==80) b='80'
+      if (a==81) b='81'
+      if (a==82) b='82'
+      if (a==83) b='83'
+      if (a==84) b='84'
+      if (a==85) b='85'
+      if (a==86) b='86'
+      if (a==87) b='87'
+      if (a==88) b='88'
+      if (a==89) b='89'
+      if (a==90) b='90'
+      if (a==91) b='91'
+      if (a==92) b='92'
+      if (a==93) b='93'
+      if (a==94) b='94'
+      if (a==95) b='95'
+      if (a==96) b='96'
+      if (a==97) b='97'
+      if (a==98) b='98'
+      if (a==99) b='99'
       return
       end

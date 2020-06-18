@@ -13,9 +13,9 @@ c
       double precision,allocatable::t(:),std(:),g(:,:),d(:),w(:),cal(:)
       double precision,allocatable::m(:),sg(:),teq(:)
       integer i,j,s1,s2,m1,n,ns,stat,neq,H,tyeq,tm
-      
+
       pi=atan(1.)*4
-      
+
       open(1,file='comfilt.inp',status='old')
       ns=0
       stat=0
@@ -123,7 +123,7 @@ c
         if(tyeq==1) deallocate(teq,sym)
       end do
       close(1)
-     
+
       call filter(ns)
       call fit(ns)
 
@@ -197,7 +197,7 @@ c.......................................................................
           close(11)
         end do
         close(10,status='delete')
-        
+
         call bubble_sort(tt,tn)
         t1=1
         do i=2,tn
@@ -231,32 +231,32 @@ c.......................................................................
         open(11,file=outfile)
         ne=0
         do k=1,t1
-	  err=0.
-	  nt=0
-	  do i=1,ns
-	    do j=1,n(i)
-	      if(abs(rt(k)-t(i,j))<.0001) then
-	        err=err+res(i,j)
-	        nt=nt+1
-	        exit
-	      end if
-	    end do
-	  end do
-	  if(nt<4) then
-	    if(c==1) open(10,file='warning-e.sum',position='append')
-	    if(c==2) open(10,file='warning-n.sum',position='append')
-	    if(c==3) open(10,file='warning-h.sum',position='append')
-	    write(10,'(f10.5," Number of stations: ",i1," < 4 !!")')
+          err=0.
+          nt=0
+          do i=1,ns
+            do j=1,n(i)
+              if(abs(rt(k)-t(i,j))<.0001) then
+                err=err+res(i,j)
+                nt=nt+1
+                exit
+              end if
+            end do
+          end do
+          if(nt<4) then
+            if(c==1) open(10,file='warning-e.sum',position='append')
+            if(c==2) open(10,file='warning-n.sum',position='append')
+            if(c==3) open(10,file='warning-h.sum',position='append')
+            write(10,'(f10.5," Number of stations: ",i1," < 4 !!")')
      +      rt(k),nt
-	    close(10)
-	  end if
-	  if(nt<2) cycle
-	  err=err/real(nt)
-	  write(11,'(f10.5,f9.2)')rt(k),err
-	  ne=ne+1
+            close(10)
+          end if
+          if(nt<2) cycle
+          err=err/real(nt)
+          write(11,'(f10.5,f9.2)')rt(k),err
+          ne=ne+1
         end do
         close(11)
-        
+
         open(10,file=outfile,status='old')  ! step 3: filtering
         allocate(et(ne),e(ne))
         do i=1,ne
@@ -308,7 +308,7 @@ c.......................................................................
       pi=atan(1.)*4
 
       print*,'Start fit....'
-      
+
       open(1,file='comfilt.para')
       open(2,file='comfilt.out')
       open(3,file='comfilt.inp',status='old')
@@ -611,7 +611,7 @@ c.......................................................................
       close(3)
       close(2)
       close(1)
-      
+
       print*,'End fit....'
 
       return

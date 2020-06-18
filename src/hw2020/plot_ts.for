@@ -31,7 +31,7 @@
         print*,'Processing in station: ',site(i)
         maping='map'//site(i)(1:4)//'.bat'
         ps='map'//site(i)(1:4)//'.ps'
-        
+
         file(1)='ts_'//site(i)//'_n.gmt'
         file(2)='ts_'//site(i)//'_e.gmt'
         file(3)='ts_'//site(i)//'_u.gmt'
@@ -44,7 +44,7 @@
         file(10)='ts_'//site(i)//'_n_t.gmt'
         file(11)='ts_'//site(i)//'_e_t.gmt'
         file(12)='ts_'//site(i)//'_u_t.gmt'
-        
+
         open(11,file=maping)
         write(11,'("echo off")')
         write(11,'("gmtset ANNOT_FONT_SIZE 8p LABEL_FONT_SIZE 9p TICK_",
@@ -74,7 +74,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           ! find x-axis and y-axis boundaries
           call bound(xmax,xmin,0.1,xmaxb,xminb)
           call bound(ymax,ymin,0.1,ymaxb,yminb)
-          
+
           if(pxminb>-9999) xminb=pxminb
           if(pxmaxb< 9999) xmaxb=pxmaxb
 
@@ -110,10 +110,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/25
      +5 -G255 -P -K -O -V >> ",a10)')file(4),ps
             inquire(file=file(7),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0 
+            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0
      +-G255 -P -K -O -V >> ",a10)')file(7),ps
             inquire(file=file(10),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -K 
+            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -K
      +-O -V >> ",a10)')file(10),ps
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -121,7 +121,7 @@ c     east component                                                            
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
           else if(j==2)then
             fmt='("psbasemap -B",f7.3,":""Year"":/",f7.3,":""East (mm)""
-     +:Wesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3," -K -O -P 
+     +:Wesn -JX6.5i/1.8i -R",f7.3,"/",f7.3,"/",f7.3,"/",f7.3," -K -O -P
      +-V -Y-1.95i -X0i >> ",a10)'
             fmt(18:18)=para(dx)
             fmt(37:37)=para(dy)
@@ -143,10 +143,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/25
      +5 -G255 -P -K -O -V >> ",a10)')file(5),ps
             inquire(file=file(8),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0 
+            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0
      +-G255 -P -K -O -V >> ",a10)')file(8),ps
             inquire(file=file(11),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -K 
+            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -K
      +-O -V >> ",a10)')file(11),ps
 
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
@@ -176,10 +176,10 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
             if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/25
      +5 -G255 -P -K -O -V >> ",a10)')file(6),ps
             inquire(file=file(9),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0 
+            if(alive) write(11,'("psxy ",a15," -JX -R -Sc.03i -W2/0/0/0
      +-G255 -P -O -V >> ",a10)')file(9),ps
             inquire(file=file(12),exist=alive)
-            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -O 
+            if(alive) write(11,'("psxy ",a15," -JX -R -W3/0/180/0 -P -O
      +-V >> ",a10)')file(12),ps
           end if
         end do
@@ -189,7 +189,7 @@ cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         call system(maping)
       end do
       if(neq>0) deallocate(teq)
-      
+
       stop
       end
 
@@ -259,11 +259,11 @@ c***********************************************************************
 
 c***********************************************************************
       function para(val)
-      
+
       implicit none
       character para*1
       real*8 val
-      
+
       if((val<=-1000).and.(val>-10000)) para='9'
       if((val<=-100).and.(val>-1000)) para='8'
       if((val<=-10).and.(val>-100)) para='7'
@@ -272,6 +272,6 @@ c***********************************************************************
       if((val<100).and.(val>=10)) para='6'
       if((val<1000).and.(val>=100)) para='7'
       if((val<10000).and.(val>=1000)) para='8'
-      
+
       return
       end

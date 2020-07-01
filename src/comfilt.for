@@ -469,9 +469,9 @@ c.......................................................................
           fmt='(a4,1x,a1,1x,10f19.9)'
           call int2char(m1,cm1)
           fmt(14:15)=cm1(1:2)
-          if(s2==1) write(1,fmt)sta(s1),'e',(m(i),i=1,m1)
-          if(s2==2) write(1,fmt)sta(s1),'n',(m(i),i=1,m1)
-          if(s2==3) write(1,fmt)sta(s1),'u',(m(i),i=1,m1)
+          if(s2==1) write(1,fmt,advance='no')sta(s1),'e',(m(i),i=1,m1)
+          if(s2==2) write(1,fmt,advance='no')sta(s1),'n',(m(i),i=1,m1)
+          if(s2==3) write(1,fmt,advance='no')sta(s1),'u',(m(i),i=1,m1)
           fmt='(7x,10f19.9)'
           fmt(5:6)=cm1(1:2)
           write(1,fmt)(sg(i),i=1,m1)

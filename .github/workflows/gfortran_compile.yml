@@ -2,7 +2,12 @@
 
 name: Fortran Program with Meson Build System Simple Compiling Test
 
-on: [push, pull_request]
+on:
+    push
+    pull_request
+    schedule:
+    - cron: "0 2 * * 3"
+
 
 jobs:
   build:

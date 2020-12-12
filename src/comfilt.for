@@ -55,9 +55,9 @@ c
           end do
         end if
         do s2=1,3
-          if(s2==1) infile='ts_'//sta//'_e_o.dat'
-          if(s2==2) infile='ts_'//sta//'_n_o.dat'
-          if(s2==3) infile='ts_'//sta//'_u_o.dat'
+          if(s2==1) infile='ts_'//sta//'_e_b.dat'
+          if(s2==2) infile='ts_'//sta//'_n_b.dat'
+          if(s2==3) infile='ts_'//sta//'_u_b.dat'
           print*,'  Processing file: ',infile
           open(10,file=infile,status='old')
           n=0

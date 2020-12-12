@@ -45,9 +45,9 @@
           end do
         end if
         do s2=1,3
-          if(s2==1) infile='ts_'//sta//'_e_o.dat'
-          if(s2==2) infile='ts_'//sta//'_n_o.dat'
-          if(s2==3) infile='ts_'//sta//'_u_o.dat'
+          if(s2==1) infile='ts_'//sta//'_e_b.dat'
+          if(s2==2) infile='ts_'//sta//'_n_b.dat'
+          if(s2==3) infile='ts_'//sta//'_u_b.dat'
           if(s2==1) outfile='ts_'//sta//'_e_c.dat'
           if(s2==2) outfile='ts_'//sta//'_n_c.dat'
           if(s2==3) outfile='ts_'//sta//'_u_c.dat'

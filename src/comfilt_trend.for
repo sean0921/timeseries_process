@@ -17,7 +17,7 @@ c
       print*,'                         PROGRAM COMFILT_TREND                         '
       print*,'                                            by Kuo-En Ching 2006.05.02 '
       print*,'                                                     Update 2006.05.07 '
-      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.04.08+'
+      print*,'Seismology Lab, Department of Earth Sciences, NCKU   Update 2020.12.17+'
       print*,''
       print*,'source code: https://github.com/sean0921/timeseries_process'
       print*,''

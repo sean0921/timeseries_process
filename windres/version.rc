@@ -13,7 +13,7 @@ BEGIN
     BLOCK "040904E4"
     BEGIN
       VALUE "CompanyName", "Department of Earth Sciences, NCKU"
-      VALUE "FileDescription", "Severnal Tools about Time Series Process (compiled by GNU Fortran and built by GNU AutoTools)"
+      VALUE "FileDescription", "Severnal Tools about Time Series Process (compiled by GNU Fortran Compiler and built by Meson Build System)"
       VALUE "FileVersion", VERSION_STR
       VALUE "LegalCopyright", "Seismology Lab, Department of Earth Sciences, NCKU"
       VALUE "ProductName", "Time Series Process Toolchain"

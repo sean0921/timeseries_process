@@ -44,18 +44,16 @@ c
         stop
       end if
 
-#ifdef PLATFORM_IS_WINDOWS
       inquire(file='fil.dat',exist=alive)
-      if(alive) call system('del fil.dat')
+      if(alive) open(8,file='fil.dat',status='old')
+      if(alive) close(8,status='delete')
       inquire(file='error.msg',exist=alive)
-      if(alive) call system('del error.msg')
+      if(alive) open(9,file='error.msg',status='old')
+      if(alive) close(9,status='delete')
+#ifdef PLATFORM_IS_WINDOWS
       call system('del ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else
-      inquire(file='fil.dat',exist=alive)
-      if(alive) call system('rm -f fil.dat')
-      inquire(file='error.msg',exist=alive)
-      if(alive) call system('rm -f error.msg')
       call system('rm -f ts_????_b.dat ts_????_n_b.dat ts_????_e_b.dat ts_????_u_b.dat')
       call system('for f in $(ls FN??????.OUT);do echo $f;done >> fil.dat')
 #endif
@@ -221,18 +219,11 @@ c***********************************************************************
         end do
         if(n==1) then
           jud=1
-          close(12)
-          close(13)
-          close(14)
-          close(15)
-          close(16)
-#ifdef PLATFORM_IS_WINDOWS
-          temp='del '//out1//' '//out2//' '//out3//' '//out4//' '//inp
-          call system(temp)
-#else
-          temp='rm -f '//out1//' '//out2//' '//out3//' '//out4//' '//inp
-          call system(temp)
-#endif
+          close(12,status='delete')
+          close(13,status='delete')
+          close(14,status='delete')
+          close(15,status='delete')
+          close(16,status='delete')
           open(11,file='error.msg',position='append')
           write(11,'("Station ",a4," is not found!")')sta(i)
           write(*,'(" Warning!! Station ",a4," is not found!")')sta(i)

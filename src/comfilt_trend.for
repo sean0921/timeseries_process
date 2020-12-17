@@ -153,29 +153,21 @@ c.......................................................................
 
       print*,'Start filter....'
 
-#ifdef PLATFORM_IS_WINDOWS
       inquire(file='warning-e.sum',exist=alive)
-      if(alive) call system('del warning-e.sum')
       inquire(file='warning-n.sum',exist=alive)
-      if(alive) call system('del warning-n.sum')
       inquire(file='warning-u.sum',exist=alive)
-      if(alive) call system('del warning-u.sum')
       inquire(file='fil.dat',exist=alive)
-      if(alive) call system('del fil.dat')
       inquire(file='tmp.dat',exist=alive)
-      if(alive) call system('del fil.dat')
-#else
-      inquire(file='warning-e.sum',exist=alive)
-      if(alive) call system('rm -f warning-e.sum')
-      inquire(file='warning-n.sum',exist=alive)
-      if(alive) call system('rm -f warning-n.sum')
-      inquire(file='warning-u.sum',exist=alive)
-      if(alive) call system('rm -f warning-u.sum')
-      inquire(file='fil.dat',exist=alive)
-      if(alive) call system('rm -f fil.dat')
-      inquire(file='tmp.dat',exist=alive)
-      if(alive) call system('rm -f fil.dat')
-#endif
+      if(alive) open(5,file='warning-e.sum',status='old')
+      if(alive) open(6,file='warning-n.sum',status='old')
+      if(alive) open(7,file='warning-u.sum',status='old')
+      if(alive) open(8,file='fil.dat',status='old')
+      if(alive) open(9,file='tmp.dat',status='old')
+      if(alive) close(5,status='delete')
+      if(alive) close(6,status='delete')
+      if(alive) close(7,status='delete')
+      if(alive) close(8,status='delete')
+      if(alive) close(9,status='delete')
 
       do c=1,3
         open(10,file='comfilt.inp',status='old')

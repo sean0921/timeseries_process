@@ -21,11 +21,11 @@ c
       print*,''
 
       inquire(file='fil.dat',exist=alive)
+      if(alive) open(10,file='fil.dat',status='old')
+      if(alive) close(10,status='delete')
 #ifdef PLATFORM_IS_WINDOWS
-      if(alive) call system('del fil.dat')
       call system('for %f in (FN??????.OUT) do echo %f >> fil.dat')
 #else
-      if(alive) call system('rm -f fil.dat')
       call system('for f in $(ls FN??????.OUT);do echo $f;done>fil.dat')
 #endif
 

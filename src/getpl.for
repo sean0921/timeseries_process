@@ -79,7 +79,7 @@ c
       end do
       close(12,status='delete')
 
-      open(12,file='getpl_o.gout')
+      open(12,file='getpl_b.gout')
       write(12,'(a4,1x,2f8.4)')sta(1),lda(1),phy(1)
       do i=2,n
         ty=0

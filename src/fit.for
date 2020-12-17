@@ -64,9 +64,9 @@
         end if
         allocate(ce(m2),cn(m2),ch(m2),ces(m2),cns(m2),chs(m2),pve(m3),pvn(m3),pvh(m3),pves(m3),pvns(m3),pvhs(m3))
         do s2=1,3
-          if(s2==1) infile='ts_'//sta(s1)//'_e_o.dat'
-          if(s2==2) infile='ts_'//sta(s1)//'_n_o.dat'
-          if(s2==3) infile='ts_'//sta(s1)//'_u_o.dat'
+          if(s2==1) infile='ts_'//sta(s1)//'_e_b.dat'
+          if(s2==2) infile='ts_'//sta(s1)//'_n_b.dat'
+          if(s2==3) infile='ts_'//sta(s1)//'_u_b.dat'
           print*,'  Processing file: ',infile
           open(10,file=infile,status='old')
           n=0

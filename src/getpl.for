@@ -32,6 +32,7 @@ c
       open(12,file='tmp')
       open(15,file='fil.dat',status='old')
       stat=0
+      n=0
       do while(stat==0)
         read(15,*,iostat=stat)
         if(stat/=0) exit

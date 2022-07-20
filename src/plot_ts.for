@@ -247,6 +247,7 @@ c***********************************************************************
       real v1,v2,v3,v4
       real*8 max,min,maxb,minb,db,d,mtl,mtld,tmp
 
+      mtl=0
       if((max-min)<=v1) mtl=v2
       if((max-min)>=v1) mtl=v3
       if((maxb-minb)<=(mtl*db)) mtld=mtl/v4

@@ -5,6 +5,7 @@ c----bern2time.for---
 c
       program bern2time
 
+      use, intrinsic:: iso_fortran_env, only: stdin=>input_unit
       implicit none
       character line*200
       character sta1*4,inpfile*12
@@ -40,7 +41,7 @@ c
         fvh=0.
       else
         print*,'Input Error!!'
-        pause
+        read(stdin,*)
         stop
       end if
 
@@ -81,6 +82,7 @@ c
           if(stat/=0) exit
           if(line(1:15)==' FILE TYP FREQ.') then
             t=0.
+            t1=0.
             t2=24.
             read(11,'(/)')
             do while (.true.)
@@ -129,16 +131,16 @@ c
       end do
       close(11)
 
-      call time_anal(n,outfile,sn,sta,ch)
+      call time_anal(n,outfile,sn,sta)
       deallocate(outfile,sta)
       stop
       end
 
 c***********************************************************************
-      subroutine time_anal(n,plhfil,sn,sta,ch)
+      subroutine time_anal(n,plhfil,sn,sta)
 
       implicit none
-      integer i,j,n,sn,stat,lon,lat,lonm,latm,ch
+      integer i,j,n,sn,stat,lon,lat,lonm,latm
       character plhfil(n)*10,sta(sn)*4,yr*4,dy*3,t*8,sta1*4,out*8
       real*8 lons,lats,hgh,en,ee,eh,tt
 
@@ -170,18 +172,19 @@ c***********************************************************************
       end do
 
       print*,'End time_anal'
-      call coordvar(sn,sta,ch)
+      call coordvar(sn,sta)
 
       return
       end
 
 c***********************************************************************
-      subroutine coordvar(stn,sta,ch)
+      subroutine coordvar(stn,sta)
 
+      use, intrinsic:: iso_fortran_env, only: stdin=>input_unit
       implicit none
-      integer i,k,n,stn,stat,jud,lon,lat,lonm,latm,ch
+      integer i,k,n,stn,stat,jud,lon,lat,lonm,latm
       integer,allocatable::yr(:),dy(:)
-      character sta(stn)*4,inp*8,temp*75
+      character sta(stn)*4,inp*8
       character out1*15,out2*15,out3*15,out4*13
       real*8 lons,lats,avgn,avge,avgh,londt,latdt,pi,adn,ade,adh
       real*8 fve,fvn,fvh
@@ -284,7 +287,7 @@ c***********************************************************************
       end do
 
       print*,'End coordvar'
-      if(jud==1) pause
+      if(jud==1) read(stdin,*)
 
       return
       end

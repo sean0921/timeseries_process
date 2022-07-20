@@ -6,7 +6,7 @@
       character,allocatable::sym(:)*1
       real*8 cal,t,d,s,pi
       double precision,allocatable::m(:),teq(:),g(:)
-      integer i,j,s1,s2,m1,H,ns,stat,neq,tyeq,tm,ty,nT
+      integer i,j,s1,s2,m1,H,ns,stat,neq,tyeq,tm
 
       print*,'                         PROGRAM REMOVE_TREND                          '
       print*,'                                            by Kuo-En Ching 2005.01.11 '

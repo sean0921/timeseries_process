@@ -1,6 +1,6 @@
 project('timeseries_process',
         'fortran',
-        version: '2020.1217.0.900',
+        version: '2022.720.0.900',
         default_options:['buildtype=debugoptimized']
 )
 add_global_arguments('-cpp',language:'fortran')

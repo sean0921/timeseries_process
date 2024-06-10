@@ -1,3 +1,5 @@
+- I won't update this repo anymore.  Actually I don't know how this program works either. (?
+
 # 時間序列處理工具
 
 - [點我直接下載 .exe 檔](https://github.com/sean0921/timeseries_process/releases)
